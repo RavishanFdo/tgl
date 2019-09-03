@@ -2,17 +2,18 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
+import AdminNavbar from '../admin/layout/AdminNavbar'
+import AdminSidebar from '../admin/layout/AdminSidebar'
 
 
 const Navbar = () => {
     return(
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div className="container">
-                 <Link to='/' className='brand-logo'>Trans Global Logistics</Link>
-                 {/* <SignedInLinks></SignedInLinks> */}
-                 <SignedOutLinks></SignedOutLinks>
-            </div>
-        </nav>
+        <div>
+            <AdminSidebar></AdminSidebar>
+            <AdminNavbar></AdminNavbar>
+            {/* <SignedInLinks></SignedInLinks> */}
+            {/* <SignedOutLinks></SignedOutLinks> */}
+        </div>
     )
 }
 

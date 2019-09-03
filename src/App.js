@@ -8,6 +8,7 @@ import Contact from './components/dashboard/Contact'
 import Footer from './components/layout/Footer'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
+import AdminDashboard from './components/admin/dashboard/AdminDashboard'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/contact' component={Contact} />
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
+          <Route path='/admin' component={AdminDashboard} />
         </Switch>
         <Footer></Footer>
       </div>
