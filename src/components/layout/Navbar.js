@@ -9,8 +9,10 @@ import AdminSidebar from '../admin/layout/AdminSidebar'
 const Navbar = () => {
     return(
         <div>
-            <AdminSidebar></AdminSidebar>
             <AdminNavbar></AdminNavbar>
+            <AdminSidebar></AdminSidebar> 
+            
+
             {/* <SignedInLinks></SignedInLinks> */}
             {/* <SignedOutLinks></SignedOutLinks> */}
         </div>
