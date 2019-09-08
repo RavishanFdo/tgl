@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+// import {NavLink} from 'react-router-dom'
 import Datetime from 'react-datetime'
+import {connect} from 'react-redux'
+import {addImportHire} from '../../../store/actions/adminHireActions'
 
 class AddImport extends Component {
     state = {
@@ -29,7 +31,9 @@ class AddImport extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+
+        this.props.addImportHire(this.state)
     }
 
     handlePickupDate = (e) => {
@@ -113,4 +117,10 @@ class AddImport extends Component {
     }
 }
 
-export default AddImport;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addImportHire: (importHire) => dispatch(addImportHire(importHire))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AddImport);

@@ -1,13 +1,17 @@
 import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+// import {NavLink} from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import Exports from './Exports'
 import Imports from './Imports'
+import {connect} from 'react-redux'
 
-class Hire extends Component {
+class Hires extends Component {
     
     render() {
+        const importHires = this.props.hires.filter(item => item.hireType == "import")
+        const exportHires = this.props.hires.filter(item => item.hireType == "export")
+        // console.log(importHires)
         return (
             <div className="main-panel">
             <div id="content" className="container-fluid" role="main">
@@ -18,10 +22,10 @@ class Hire extends Component {
                         <Tab>EXPORTS</Tab>
                     </TabList>
                     <TabPanel>
-                        <Imports></Imports>
+                        <Imports importHires={importHires}></Imports>
                     </TabPanel>
                     <TabPanel>
-                        <Exports></Exports>
+                        <Exports exportHires={exportHires}></Exports>
                     </TabPanel>
                 </Tabs>
             </div>
@@ -30,4 +34,10 @@ class Hire extends Component {
     }
 }
 
-export default Hire
+const mapStateToProps = (state) => {
+    return {
+        hires: state.hire.hires
+    }
+}
+
+export default connect(mapStateToProps)(Hires)

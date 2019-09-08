@@ -1,10 +1,32 @@
-import React from 'react'
+import React, {Component} from 'react'
+import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import AddCustomer from './AddCustomer'
 
-const Customers = () => {
-    return(
+
+class Customers extends Component {
+    constructor(props) {
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = { collapse: false };
+      }
+    
+      toggle() {
+        this.setState(state => ({ collapse: !state.collapse }));
+      }
+
+    render () {
+        return(
         <div className="main-panel">
             <div id="content" className="container-fluid" role="main">
                 <br/><br/>
+                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>+ Customer</Button>
+                <Collapse isOpen={this.state.collapse}>
+                <Card >
+                    <CardBody className="centered">
+                        <AddCustomer></AddCustomer>
+                    </CardBody>
+                </Card>
+                </Collapse>
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
@@ -32,6 +54,7 @@ const Customers = () => {
             </div>
         </div>
     )
+        }
 }
 
 export default Customers

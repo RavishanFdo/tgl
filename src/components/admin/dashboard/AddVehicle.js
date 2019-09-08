@@ -31,9 +31,8 @@ class AddVehicle extends Component {
 
     render() {
         return (
-            <div className="main-panel">
-                <div className="container-fluid col-8">
-                    <br/><br/><br/>
+                <div className="container">
+                    <br/>
                     <h2 className="center">Add Vehicle</h2><br/><br/>
                     <form onSubmit={this.handleSubmit} >
                         <div className="row">
@@ -82,7 +81,6 @@ class AddVehicle extends Component {
                         </div>
                     </form>
                 </div>
-            </div>
         )
     }
 }

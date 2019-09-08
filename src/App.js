@@ -18,6 +18,8 @@ import AddDriver from './components/admin/dashboard/AddDriver'
 import AddVehicle from './components/admin/dashboard/AddVehicle'
 import AddHire from './components/admin/dashboard/AddHire'
 import Hires from './components/admin/dashboard/Hires'
+import Drivers from './components/admin/dashboard/Drivers'
+import Vehicles from './components/admin/dashboard/Vehicles'
 
 
 function App() {
@@ -37,7 +39,9 @@ function App() {
             <Route exact path='/admin' component={AdminDashboard} />
             <Route path='/admin/customers' component={Customers} />
             <Route path='/admin/addcustomer' component={AddCustomer} />
+            <Route path='/admin/drivers' component={Drivers} />
             <Route path='/admin/adddriver' component={AddDriver} />
+            <Route path='/admin/vehicles' component={Vehicles} />
             <Route path='/admin/addvehicle' component={AddVehicle} />
             <Route path='/admin/addhire' component={AddHire} />
             <Route path='/admin/hires' component={Hires} />

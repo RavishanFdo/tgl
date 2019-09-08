@@ -35,20 +35,20 @@ class Sidebar extends Component {
             null
           )}
         <div className="logo center">
-            <h4>DASHBOARD</h4>
+            <h4><NavLink to='/admin'>DASHBOARD</NavLink></h4>
         </div>
         <div className="sidebar-wrapper">
           <ul className="nav">
-            <a href="#customer" className="list-group-item"><h5><i className="fa fa-users fa-fw fa-fw" aria-hidden="true"></i>  CUSTOMERS</h5></a>  
-            <a href="#hire" className="list-group-item"><h5><i className="fa fa-file fa-fw"></i>  IMPORTS</h5></a>
-            <a href="#hire" className="list-group-item"><h5><i className="fa fa-file fa-fw"></i>  EXPORTS</h5></a>
-            <a href="#drivers" className="list-group-item"><h5><i className="fa fa-address-card fa-fw"></i>  DRIVERS</h5></a>
-            <a href="#drivers" className="list-group-item"><h5><i className="fa fa-truck fa-fw"></i>  VEHICLES</h5></a>
+            <a href="#customer" className="list-group-item"><h5><i className="fa fa-users fa-fw fa-fw" aria-hidden="true"></i>  <NavLink to='/admin/customers'>Customers</NavLink></h5></a>  
+            <a href="#hire" className="list-group-item"><h5><i className="fa fa-file fa-fw"></i>  <NavLink to='/admin/hires'>Hires</NavLink></h5></a>
+            <a href="#drivers" className="list-group-item"><h5><i className="fa fa-address-card fa-fw"></i>  <NavLink to='/admin/drivers'>Drivers</NavLink></h5></a>
+            <a href="#drivers" className="list-group-item"><h5><i className="fa fa-truck fa-fw"></i>  <NavLink to='/admin/vehicles'>Vehicles</NavLink></h5></a>
           </ul>
           <br/><br/><br/>
-          <ul>
-          <a href="#drivers" className="list-group-item"><h5><i className="fa fa-clock fa-fw"></i>  Hire Requests</h5></a>
-          <a href="#drivers" className="list-group-item"><h5><i className="fa fa-clock fa-fw"></i>  Ongoing Hires</h5></a>
+          <ul className="nav">
+          <a href="#drivers" className="list-group-item"><h5><i className="fa fa-clock fa-fw"></i>  <NavLink to='/admin'>Hire Requests</NavLink></h5></a>
+          <a href="#drivers" className="list-group-item"><h5><i className="fa fa-clock fa-fw"></i>  <NavLink to='/admin'>Ongoing Hires</NavLink></h5></a>
+          <a href="#drivers" className="list-group-item"><h5><i className="fa fa-clock fa-fw"></i>  <NavLink to='/admin/addhire'>Add Hire</NavLink></h5></a>
           </ul>
         </div>
       </div>

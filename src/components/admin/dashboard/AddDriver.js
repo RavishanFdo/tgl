@@ -30,9 +30,8 @@ class AddDriver extends Component {
 
     render() {
         return (
-            <div className="main-panel">
-                <div className="container-fluid col-8">
-                    <br/><br/><br/>
+                <div className="container">
+                    <br/>
                     <h2 className="center">Add Driver</h2><br/><br/>
                     <form onSubmit={this.handleSubmit} >
                         <div className="row">
@@ -59,7 +58,7 @@ class AddDriver extends Component {
                                 <input placeholder="NIC" type="text" id="nic" onChange={this.handleChange} required/>
                             </div>
                         </div>
-                        <div className="input-field row col-6">
+                        <div className="input-field  col-6">
                             <input placeholder="Email" type="email" id="email" onChange={this.handleChange} />
                         </div>
                         <div className="row">
@@ -77,7 +76,6 @@ class AddDriver extends Component {
                         </div>
                     </form>
                 </div>
-            </div>
         )
     }
 }
