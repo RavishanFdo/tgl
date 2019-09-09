@@ -21,9 +21,8 @@ class SignIn extends Component {
     render() {
         return (
             <div className="loginBody">
-                <div className="container">
-                    <br/>
-                    <div className="d-flex justify-content-center h-100">
+                <div className="container-fluid">
+                    <div className="d-flex justify-content-center h-100" style={{paddingTop:'300px'}}>
                         <div className="card signin">
                             <div className="card-header">
                                 <h3>Sign In</h3>

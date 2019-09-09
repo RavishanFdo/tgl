@@ -26,8 +26,8 @@ class Vehicles extends Component {
                     </CardBody>
                 </Card>
                 </Collapse>
-                <table class="table">
-                    <thead class="thead-dark">
+                <table className="table">
+                    <thead className="thead-dark">
                     <tr>
                         <th>Vehicle No</th>
                         <th>Make</th>
@@ -45,7 +45,7 @@ class Vehicles extends Component {
                         <td></td>
                         <td></td>
                         <td>
-                            <button type="button" data-toggle="modal" data-id="" class="edit-details btn btn-primary" data-target="#edit">View</button>
+                            <button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button>
                         </td>
                         </tr>
                     </tbody>

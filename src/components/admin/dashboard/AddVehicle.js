@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+// import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {addVehicle} from '../../../store/actions/adminActions'
 
 class AddVehicle extends Component {
     state = {
@@ -26,7 +28,8 @@ class AddVehicle extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.addVehicle(this.state)
     }
 
     render() {
@@ -74,7 +77,7 @@ class AddVehicle extends Component {
                         <div className="input-field row col-6">
                             <textarea placeholder="Remarks" style={{ minHeight: 100 }} type="text" id="remarks" onChange={this.handleChange}/>
                         </div>
-                        <input type="hidden" id="userType" value="vehicle"/><br/><br/>
+                        <br/><br/>
                         <div className="input-field center">
                             <button className="btn blue lighten-1 z-depth-0">Register</button>
                             <button className="btn red lighten-1 z-depth-0">Cancel</button>
@@ -85,4 +88,10 @@ class AddVehicle extends Component {
     }
 }
 
-export default AddVehicle;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addVehicle: (vehicle) => dispatch(addVehicle(vehicle))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(AddVehicle);

@@ -6,8 +6,7 @@ import {addImportHire} from '../../../store/actions/adminHireActions'
 
 class AddImport extends Component {
     state = {
-        hireType: 'import',
-        containerType: '',
+        containerType: '20',
         pickupLocation: '',
         pickupDatetime: '',
         cargoType: '',
@@ -19,8 +18,6 @@ class AddImport extends Component {
         customerId: '',
         vehicleId: '',
         remarks: '',
-        completed: '0',
-        driverAccepted: '0',
     }
 
     handleChange = (e) => {
@@ -31,21 +28,28 @@ class AddImport extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state);
-
+        // console.log(this.state)
         this.props.addImportHire(this.state)
     }
 
     handlePickupDate = (e) => {
         this.setState({
-            pickupDatetime: e
+            pickupDatetime: e._d
         })
     }
 
     handleVesselArrivalDate = (e) => {
         this.setState({
-            vesselArrivalDatetime: e
+            vesselArrivalDatetime: e._d
         })
+    }
+
+    handleContainerType = (e) => {
+        if(e.target.value){
+            this.setState({
+                containerType: e.target.value
+            })
+        }
     }
 
     render() {
@@ -55,7 +59,7 @@ class AddImport extends Component {
                 <h2 className="center">Add Import</h2><br/><br/>
                 <form onSubmit={this.handleSubmit} >
                     <div className="row col-4">
-                        <select className="form-control" placeholder="Container Type" id="containerType" onChange={this.handleChange} required>
+                        <select className="form-control" placeholder="Container Type" id="containerType" onChange={this.handleContainerType} required>
                             <option value="20">20ft</option>
                             <option value="40">40ft</option>
                         </select>

@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import Datetime from 'react-datetime'
+import {connect} from 'react-redux'
+import {addExportHire} from '../../../store/actions/adminHireActions'
 
 class AddExport extends Component {
     state = {
-        hireType: 'export',
-        containerType: '',
+        containerType: '20',
         pickupLocation: '',
         pickupDatetime: '',
         cargoType: '',
@@ -29,19 +30,28 @@ class AddExport extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.addExportHire(this.state)
     }
 
     handlePickupDate = (e) => {
         this.setState({
-            pickupDatetime: e
+            pickupDatetime: e._d
         })
     }
 
     handleLoadingDate = (e) => {
         this.setState({
-            loadingDatetime: e
+            loadingDatetime: e._d
         })
+    }
+
+    handleContainerType = (e) => {
+        if(e.target.value){
+            this.setState({
+                containerType: e.target.value
+            })
+        }
     }
 
     render() {
@@ -51,7 +61,7 @@ class AddExport extends Component {
                 <h2 className="center">Add Export</h2><br/><br/>
                 <form onSubmit={this.handleSubmit} >
                     <div className="row col-4">
-                        <select className="form-control" placeholder="Container Type" id="containerType" onChange={this.handleChange} required>
+                        <select className="form-control" placeholder="Container Type" id="containerType" onChange={this.handleContainerType} required>
                             <option value="20">20ft</option>
                             <option value="40">40ft</option>
                         </select>
@@ -108,4 +118,10 @@ class AddExport extends Component {
     }
 }
 
-export default AddExport;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addExportHire: (exportHire) => dispatch(addExportHire(exportHire))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(AddExport);
