@@ -15,7 +15,7 @@ const adminHireReducer = (state = initState, action) => {
             console.log('Add Import error',action.err)
             return state;
         case 'ADD_EXPORT':
-            console.log('Export added', action.importHire)
+            console.log('Export added', action.exportHire)
             return state;
         case 'ADD_EXPORT_ERROR':
             console.log('Add Export error',action.err)

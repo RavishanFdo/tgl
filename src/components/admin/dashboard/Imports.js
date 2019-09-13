@@ -2,7 +2,6 @@ import React from 'react'
 import {Badge} from 'react-bootstrap'
 
 const Imports = ({importHires}) => {
-    // console.log(importHires)
     return(
         <div>
             <br/><br/>
@@ -24,19 +23,19 @@ const Imports = ({importHires}) => {
                 <tbody>
                     {importHires && importHires.map(imp =>{
                         return(
-                            <tr>
-                            <td className="center-align">{imp.containerType}</td>
-                            <td className="center-align">12-12-12</td>
-                            <td className="center-align">{imp.cargoType}</td>
-                            <td className="center-align">12-12-12</td>
-                            <td className="center-align">{imp.destination}</td>
-                            <td className="center-align">{imp.driver}</td>
-                            <td className="center-align">paul walker</td>
-                            <td className="center-align">ly123</td>
-                            <td className="center-align"><Badge variant="success">Completed</Badge></td>
-                            <td className="center-align">
-                                <button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button>
-                            </td>
+                            <tr key={imp.id}>
+                                <td className="center-align">{imp.containerType}</td>
+                                <td className="center-align">{imp.pickupDatetime.seconds}</td>
+                                <td className="center-align">{imp.cargoType}</td>
+                                <td className="center-align">{imp.vesselArrivalDatetime.seconds}</td>
+                                <td className="center-align">{imp.destination}</td>
+                                <td className="center-align">{imp.driverId}</td>
+                                <td className="center-align">{imp.customerId}</td>
+                                <td className="center-align">{imp.vehicleId}</td>
+                                <td className="center-align"><Badge variant="success">Completed</Badge></td>
+                                <td className="center-align">
+                                    <button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button>
+                                </td>
                             </tr> 
                         )
                     })}

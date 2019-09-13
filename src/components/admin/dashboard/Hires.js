@@ -5,15 +5,21 @@ import "react-tabs/style/react-tabs.css";
 import Exports from './Exports'
 import Imports from './Imports'
 import {connect} from 'react-redux'
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
+
 
 class Hires extends Component {
+    static defaultProps = { // <-- DEFAULT PROPS
+        hires: []       
+    }
     
     render() {
         const importHires = this.props.hires.filter(item => item.hireType == "import")
         const exportHires = this.props.hires.filter(item => item.hireType == "export")
         // console.log(importHires)
         return (
-            <div className="main-panel">
+        <div className="main-panel">
             <div id="content" className="container-fluid" role="main">
                 <br/><br/>
                 <Tabs className="center">
@@ -35,9 +41,15 @@ class Hires extends Component {
 }
 
 const mapStateToProps = (state) => {
+    // console.log(state)
     return {
-        hires: state.hire.hires
+        hires: state.firestore.ordered.hires
     }
 }
 
-export default connect(mapStateToProps)(Hires)
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        {collection: 'hires'}
+    ])
+)(Hires)
