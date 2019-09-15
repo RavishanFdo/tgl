@@ -33,7 +33,7 @@ class Customers extends Component {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Mobile</th>
-                        <th>Username</th>
+                        {/* <th>Username</th> */}
                         <th>User Since</th>
                         <th>Actions</th>
                     </tr>
@@ -42,7 +42,7 @@ class Customers extends Component {
                         <tr>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        {/* <td></td> */}
                         <td></td>
                         <td></td>
                         <td>

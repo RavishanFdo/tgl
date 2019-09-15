@@ -34,7 +34,7 @@ class Drivers extends Component {
                         <th>License No</th>
                         <th>NIC</th>
                         <th>Mobile</th>
-                        <th>Username</th>
+                        {/* <th>Username</th> */}
                         <th>User Since</th>
                         <th>Actions</th>
                     </tr>
@@ -45,7 +45,7 @@ class Drivers extends Component {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        {/* <td></td> */}
                         <td></td>
                         <td>
                             <button type="button" data-toggle="modal" data-id="" class="edit-details btn btn-primary" data-target="#edit">View</button>

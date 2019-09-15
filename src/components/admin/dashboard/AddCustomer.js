@@ -8,7 +8,7 @@ class AddCustomer extends Component {
         firstName: '',
         lastName: '',
         mobile: '',
-        username: '',
+        // username: '',
         dob: ''
 
     }
@@ -50,9 +50,9 @@ class AddCustomer extends Component {
                             <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required />
                         </div>
                         <div className="row">
-                            <div className="input-field col-6">
+                            {/* <div className="input-field col-6">
                                 <input placeholder="Username" type="text" id="username" onChange={this.handleChange} required />
-                            </div>
+                            </div> */}
                             <div className="input-field col-6">
                                 <input placeholder="Password" type="password" id="password" onChange={this.handleChange} required />
                             </div>

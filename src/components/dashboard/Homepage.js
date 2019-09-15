@@ -49,9 +49,9 @@ const Homepage = () => {
 
             <div  >
                 <Carousel style={carouselStyle}>
-                    <img src={require('../../img/index3.jpg')} />
-                    <img src={require('../../img/index2.jpg')} />
-                    <img src={require('../../img/index4.jpg')} />
+                    <img src={require('../../img/index3.jpg')} alt="carousel1" />
+                    <img src={require('../../img/index2.jpg')} alt="carousel2" />
+                    <img src={require('../../img/index4.jpg')} alt="carousel3" />
                 </Carousel>
             </div>
 
@@ -69,7 +69,7 @@ const Homepage = () => {
                         </p>
                     </div>
                     <div className="col-md-4 mt-4">
-                        <img className="card-img-top" src={require('../../img/index5.jpg')} alt="Card image cap"/>
+                        <img className="card-img-top" src={require('../../img/index5.jpg')} alt="Card cap"/>
                     </div>
                 </div>
            
@@ -83,7 +83,7 @@ const Homepage = () => {
                         <div className="col">
                         <div className="card">
                             <div className="card-body">
-                            <img className="card-img-top" src={require('../../img/index6.jpg')} alt="Card image cap"/>
+                            <img className="card-img-top" src={require('../../img/index6.jpg')} alt="Card cap"/>
                             <hr/>
                             <h5 className="card-title">BEST SERVICE</h5>
                             <p className="card-text">Our mission is to attract, satisfy and retain our beloved customers by providing Best in className transportation solutions and fostering a profitable, disciplined culture service.</p>
@@ -93,7 +93,7 @@ const Homepage = () => {
                         <div className="col">
                         <div className="card">
                             <div className="card-body">
-                            <img className="card-img-top" src={require('../../img/index7.jpg')} alt="Card image cap"/>
+                            <img className="card-img-top" src={require('../../img/index7.jpg')} alt="Card cap"/>
                             <hr/>
                             <h5 className="card-title">SAFETY AND SECURITY</h5>
                             <p className="card-text">Safety for our employees, customers, cargo and community we work in will always remain our primary focus in all the policies, procedures and programs that govern our business.</p>
@@ -103,7 +103,7 @@ const Homepage = () => {
                         <div className="col">
                         <div className="card">
                             <div className="card-body">
-                            <img className="card-img-top" src={require('../../img/index8.jpg')} alt="Card image cap"/>
+                            <img className="card-img-top" src={require('../../img/index8.jpg')} alt="Card cap"/>
                             <hr/>
                             <h5 className="card-title">QUALIFIED EMPLOYEES</h5>
                             <p className="card-text">Our team is comprised of some of the best and qualified managers and drivers in the logistics industry. We can match your transportation and logistic needs and preferences of cargo delivery.</p>

@@ -12,12 +12,15 @@ code {
     monospace;
 }
 
-.navbar-toggleable-xl .navbar-nav .dropdown-menu {
-  /* position: absolute; */
-}
+/* .navbar-toggleable-xl .navbar-nav .dropdown-menu {
+  position: absolute;
+} */
 
 .ml-auto .nav-link{
   text-decoration: none;
+}
+.navbar{
+  z-index: 9999;
 }
 
 .navbar-brand {
@@ -65,6 +68,9 @@ code {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+
+
 
 
 /* carousel */

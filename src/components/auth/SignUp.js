@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {signUp} from '../../store/actions/authActions'
 
 class SignUp extends Component {
     state = {
@@ -8,7 +11,6 @@ class SignUp extends Component {
         firstName: '',
         lastName: '',
         mobile: '',
-        username: '',
         dob: ''
 
     }
@@ -21,10 +23,13 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.signUp(this.state)
     }
 
     render() {
+        const {auth, authError} = this.props
+        if (auth.uid) return <Redirect to='/' />
         return (
             <div className="loginBody">
                 <div className="container">
@@ -33,6 +38,9 @@ class SignUp extends Component {
                         <div className="card signup">
                             <div className="card-header">
                                 <h3>Sign Up</h3>
+                                <div className="red-text center">
+                                    {authError ? <h6>{authError}</h6> : null}
+                                </div>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={this.handleSubmit} >
@@ -52,15 +60,11 @@ class SignUp extends Component {
                                         <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required />
                                     </div>
                                     <div className="input-field">
-                                        <input placeholder="Username" type="text" id="username" onChange={this.handleChange} required />
-                                    </div>
-                                    <div className="input-field">
                                         <input placeholder="Password" type="password" id="password" onChange={this.handleChange} required />
                                     </div>
                                     <div className="input-field">
                                         <input placeholder="Confirm Password" type="password" id="confPassword" onChange={this.handleChange} required />
                                     </div>
-                                    <input type="hidden" id="userType" value="customer"/>
                                     <div className="input-field">
                                         <button className="btn blue lighten-1 z-depth-0">Register</button>
                                     </div>
@@ -79,4 +83,17 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+    return{
+        auth: state.firebase.auth,
+        authError: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        signUp: (newUser) => dispatch(signUp(newUser))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp);

@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {signIn} from '../../store/actions/authActions'
 
 class SignIn extends Component {
     state = {
@@ -15,10 +17,12 @@ class SignIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.signIn(this.state)
     }
 
     render() {
+        const {authError} = this.props
         return (
             <div className="loginBody">
                 <div className="container-fluid">
@@ -26,6 +30,9 @@ class SignIn extends Component {
                         <div className="card signin">
                             <div className="card-header">
                                 <h3>Sign In</h3>
+                                <div className="red-text center">
+                                    {authError ? <h6>{authError}</h6> : null}
+                                </div>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={this.handleSubmit} >
@@ -53,4 +60,17 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn;
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        authError: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signIn: (creds) => dispatch(signIn(creds))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignIn);

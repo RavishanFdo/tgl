@@ -9,6 +9,5 @@ export const addVehicle = (vehicle) => {
         }).catch((err) => {
             dispatch({type: 'ADD_VEHICLE_ERROR', err});
         })
-
     }
 };

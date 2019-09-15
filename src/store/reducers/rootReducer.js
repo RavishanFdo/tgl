@@ -10,7 +10,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     hire: adminHireReducer,
     vehicle: adminReducer,
-    firestore: firestoreReducer
+    firestore: firestoreReducer,
+    firebase: firebaseReducer
 });
 
 export default rootReducer 

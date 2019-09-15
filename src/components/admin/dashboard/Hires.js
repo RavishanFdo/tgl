@@ -15,8 +15,8 @@ class Hires extends Component {
     }
     
     render() {
-        const importHires = this.props.hires.filter(item => item.hireType == "import")
-        const exportHires = this.props.hires.filter(item => item.hireType == "export")
+        const importHires = this.props.hires.filter(item => item.hireType === "import")
+        const exportHires = this.props.hires.filter(item => item.hireType === "export")
         // console.log(importHires)
         return (
         <div className="main-panel">
