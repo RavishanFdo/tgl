@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {addDriver} from '../../../store/actions/adminActions'
 
 class AddDriver extends Component {
     state = {
@@ -8,7 +9,6 @@ class AddDriver extends Component {
         firstName: '',
         lastName: '',
         mobile: '',
-        // username: '',
         dob: '',
         licenseNo: '',
         nic: '',
@@ -25,14 +25,19 @@ class AddDriver extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.addDriver(this.state)
     }
 
     render() {
+        const {authError} = this.props
         return (
                 <div className="container">
                     <br/>
                     <h2 className="center">Add Driver</h2><br/><br/>
+                    <div className="red-text center">
+                        {authError ? <h6>{authError}</h6> : null}
+                    </div>
                     <form onSubmit={this.handleSubmit} >
                         <div className="row">
                             <div className="input-field col-6">
@@ -62,9 +67,6 @@ class AddDriver extends Component {
                             <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required/>
                         </div>
                         <div className="row">
-                            {/* <div className="input-field col-6">
-                                <input placeholder="Username" type="text" id="username" onChange={this.handleChange} required />
-                            </div> */}
                             <div className="input-field col-6">
                                 <input placeholder="Password" type="password" id="password" onChange={this.handleChange} required />
                             </div>
@@ -80,4 +82,16 @@ class AddDriver extends Component {
     }
 }
 
-export default AddDriver;
+const mapStateToProps = (state) => {
+    return{
+        authError: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        addDriver: (newDriver) => dispatch(addDriver(newDriver))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddDriver);

@@ -1,11 +1,8 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import {Navbar, Nav, NavItem, NavDropdown, NavbarBrand} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-const stl = {
-    textDecoration: 'none'
-}
+import {Navbar, Nav} from 'react-bootstrap'
+// import {Link} from 'react-router-dom'
 
 const SignedOutLinks = () => {
     return(

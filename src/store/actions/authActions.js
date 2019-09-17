@@ -1,3 +1,5 @@
+
+
 export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
@@ -41,7 +43,8 @@ export const signUp = (newUser) => {
                     lastName: newUser.lastName,
                     email: newUser.email,
                     mobile: newUser.mobile,
-                    dob: newUser.dob
+                    dob: newUser.dob,
+                    createAt: new Date()
                 })
             })
         }).then(() => {

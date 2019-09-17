@@ -7,21 +7,25 @@ import Imports from './Imports'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
+import {Redirect} from 'react-router-dom'
 
 
 class Hires extends Component {
     static defaultProps = { // <-- DEFAULT PROPS
         hires: []       
     }
-    
+
     render() {
+        const {auth} = this.props
+        if (!auth.uid) return <Redirect to='/signin' />
+
         const importHires = this.props.hires.filter(item => item.hireType === "import")
         const exportHires = this.props.hires.filter(item => item.hireType === "export")
-        // console.log(importHires)
+        
         return (
-        <div className="main-panel">
+        // <div className="main-panel">
             <div id="content" className="container-fluid" role="main">
-                <br/><br/>
+                <br/><br/><br/><br/>
                 <Tabs className="center">
                     <TabList>
                         <Tab>IMPORTS</Tab>
@@ -35,7 +39,7 @@ class Hires extends Component {
                     </TabPanel>
                 </Tabs>
             </div>
-        </div>
+        // </div>
         )
     }
 }
@@ -43,6 +47,7 @@ class Hires extends Component {
 const mapStateToProps = (state) => {
     // console.log(state)
     return {
+        auth: state.firebase.auth,
         hires: state.firestore.ordered.hires
     }
 }

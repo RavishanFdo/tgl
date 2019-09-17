@@ -1,7 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import {Link} from 'react-router-dom'
-import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import {Button, Nav, Navbar} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {signOut} from '../../store/actions/authActions'
 
@@ -16,7 +15,7 @@ const SignedInLinks = (props) => {
                     <Nav.Link><NavLink to='/services'>Services</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/contact'>Contact</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/'>Profile</NavLink></Nav.Link>
-                    <Nav.Link><a onClick={props.signOut}>Logout</a></Nav.Link>
+                    <Nav.Link><Button onClick={props.signOut}>Logout</Button></Nav.Link>
                 </Nav>
             </div>
         </Navbar>       

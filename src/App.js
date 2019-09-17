@@ -34,8 +34,9 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className="App">
-        <div className="wrapper">
+        <div className={type.userType === 'admin' ? "d-flex" : "wrapper"} id={type.userType === 'admin' ? "wrapper" : null}>
           {sidebar}
+          <div id={type.userType === 'admin' ? "page-content-wrapper" : null} className={type.userType === 'admin' ? "" : null}> 
             <Navbar></Navbar>
             <Switch>
               <Route exact path='/' component={Homepage} />
@@ -55,6 +56,7 @@ function App(props) {
               <Route path='/admin/addhire' component={AddHire} />
               <Route path='/admin/hires' component={Hires} />
             </Switch>
+          </div>
         </div>
         {link}
       </div>

@@ -4,6 +4,7 @@ import AddVehicle from './AddVehicle'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
+import {Redirect} from 'react-router-dom'
 
 class Vehicles extends Component {
 
@@ -22,11 +23,12 @@ class Vehicles extends Component {
     }
 
     render () {
-        const {vehicles} = this.props
+        const {auth, vehicles} = this.props
+        if (!auth.uid) return <Redirect to='/signin' />
         return(
-            <div className="main-panel">
+            // <div className="main-panel">
                 <div id="content" className="container-fluid" role="main">
-                    <br/><br/>
+                    <br/><br/><br/><br/>
                     <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>+ Vehicle</Button>
                     <Collapse isOpen={this.state.collapse}>
                     <Card >
@@ -63,27 +65,18 @@ class Vehicles extends Component {
                                 </tr> 
                             )
                         })}
-                            {/* <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button>
-                                </td>
-                            </tr> */}
                         </tbody>
                     </table>
                 </div>
-            </div>
+            // </div>
     )
         }
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
+        auth: state.firebase.auth,
         vehicles: state.firestore.ordered.vehicles
     }
 }

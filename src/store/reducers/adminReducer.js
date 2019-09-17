@@ -8,7 +8,19 @@ const adminReducer = (state = initState, action) => {
             console.log('Vehicle added', action.vehicle)
             return state;
         case 'ADD_VEHICLE_ERROR':
-            console.log('Add Import error',action.err)
+            console.log('Add Import error', action.err)
+            return state;
+        case 'CUSTOMER_ADDED':
+            console.log('Customer added successfully')
+            return state;
+        case 'FAILED_TO_ADD_CUSTOMER':
+            console.log('failed to add customer', action.err)
+            return state;
+        case 'DRIVER_ADDED':
+            console.log('Driver added successfully')
+            return state;
+        case 'FAILED_TO_ADD_DRIVER':
+            console.log('failed to add driver', action.err)
             return state;
         default:
             return state

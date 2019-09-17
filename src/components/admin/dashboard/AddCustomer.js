@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+// import {NavLink} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {addCustomer} from '../../../store/actions/adminActions'
 
 class AddCustomer extends Component {
     state = {
@@ -8,7 +11,6 @@ class AddCustomer extends Component {
         firstName: '',
         lastName: '',
         mobile: '',
-        // username: '',
         dob: ''
 
     }
@@ -21,14 +23,19 @@ class AddCustomer extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.addCustomer(this.state)
     }
 
     render() {
+        const {authError} = this.props
         return (
                 <div className="container">
                     <br/>
                     <h2 className="center">Add Customer</h2><br/><br/>
+                    <div className="red-text center">
+                        {authError ? <h6>{authError}</h6> : null}
+                    </div>
                     <form onSubmit={this.handleSubmit} >
                         <div className="row">
                             <div className="input-field col-6">
@@ -50,9 +57,6 @@ class AddCustomer extends Component {
                             <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required />
                         </div>
                         <div className="row">
-                            {/* <div className="input-field col-6">
-                                <input placeholder="Username" type="text" id="username" onChange={this.handleChange} required />
-                            </div> */}
                             <div className="input-field col-6">
                                 <input placeholder="Password" type="password" id="password" onChange={this.handleChange} required />
                             </div>
@@ -68,4 +72,16 @@ class AddCustomer extends Component {
     }
 }
 
-export default AddCustomer;
+const mapStateToProps = (state) => {
+    return{
+        authError: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        addCustomer: (newCustomer) => dispatch(addCustomer(newCustomer))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCustomer);

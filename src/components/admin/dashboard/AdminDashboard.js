@@ -2,7 +2,9 @@ import React from 'react'
 import StatCard from '../stats/StatCard'
 import Card from '../stats/Card'
 import ChartistGraph from "react-chartist";
-import { Grid, Row, Col } from "react-bootstrap";
+import {Row, Col } from "react-bootstrap";
+import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 var data = {
     labels: [
@@ -39,9 +41,11 @@ var data = {
     }
   };
 
-const AdminDashboard = () => {
+const AdminDashboard = (props) => {
+    const {auth} = props
+    if (!auth.uid) return <Redirect to='/signin' />
     return (
-        <div className="main-panel">
+        // <div className="main-panel">
             <div id="content" className="container-fluid" role="main">
                 <div className="">
                     <div style={{paddingTop:'70px'}}>
@@ -74,8 +78,14 @@ const AdminDashboard = () => {
                     </Row>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
-export default AdminDashboard
+const mapStateToProps = (state) => {
+  return{
+      auth: state.firebase.auth,
+  }
+}
+
+export default connect(mapStateToProps)(AdminDashboard)
