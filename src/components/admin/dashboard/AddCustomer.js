@@ -11,7 +11,8 @@ class AddCustomer extends Component {
         firstName: '',
         lastName: '',
         mobile: '',
-        dob: ''
+        dob: '',
+        nic: ''
 
     }
 
@@ -58,8 +59,13 @@ class AddCustomer extends Component {
                                 <input placeholder="Date of Birth" onFocus={this.handleDate} type="text" id="dob" onChange={this.handleChange} required />
                             </div>
                         </div>
-                        <div className="input-field row col-6">
-                            <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required />
+                        <div className="row">
+                            <div className="input-field col-6">
+                                <input placeholder="NIC No" type="text" id="nic" onChange={this.handleChange} required />
+                            </div>
+                            <div className="input-field col-6">
+                                <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required />
+                            </div>
                         </div>
                         <div className="row">
                             <div className="input-field col-6">

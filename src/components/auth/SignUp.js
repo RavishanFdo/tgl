@@ -11,7 +11,8 @@ class SignUp extends Component {
         firstName: '',
         lastName: '',
         mobile: '',
-        dob: ''
+        dob: '',
+        nic: ''
 
     }
 
@@ -52,6 +53,9 @@ class SignUp extends Component {
                                     </div>
                                     <div className="input-field">
                                         <input placeholder="Mobile" type="text" id="mobile" onChange={this.handleChange} required />
+                                    </div>
+                                    <div className="input-field">
+                                        <input placeholder="NIC No" type="text" id="nic" onChange={this.handleChange} required />
                                     </div>
                                     <div className="input-field">
                                         <input placeholder="Date of Birth" type="date" id="dob" onChange={this.handleChange} required />

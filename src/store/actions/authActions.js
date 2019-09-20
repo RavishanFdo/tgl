@@ -44,6 +44,8 @@ export const signUp = (newUser) => {
                     email: newUser.email,
                     mobile: newUser.mobile,
                     dob: newUser.dob,
+                    nic: newUser.nic,
+                    visibility: '1',
                     createAt: new Date()
                 })
             })

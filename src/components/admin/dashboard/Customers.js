@@ -40,6 +40,7 @@ class Customers extends Component {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Mobile</th>
+                        <th>NIC</th>
                         <th>User Since</th>
                         <th>Actions</th>
                     </tr>
@@ -51,6 +52,7 @@ class Customers extends Component {
                                 <td>{customer.firstName + ' ' + customer.lastName}</td>
                                 <td>{customer.email}</td>
                                 <td>{customer.mobile}</td>
+                                <td>{customer.nic}</td>
                                 <td>{moment(customer.createdAt.toDate()).format("MMM Do YYYY")}</td>
                                 <td>
                                     <Link to={'/admin/customers/' + customer.id}><button type="button" data-toggle="modal" data-id="" class="edit-details btn btn-primary" data-target="#edit">View</button></Link>

@@ -4,7 +4,7 @@ import AddVehicle from './AddVehicle'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 
 class Vehicles extends Component {
 
@@ -26,7 +26,6 @@ class Vehicles extends Component {
         const {auth, vehicles} = this.props
         if (!auth.uid) return <Redirect to='/signin' />
         return(
-            // <div className="main-panel">
                 <div id="content" className="container-fluid" role="main">
                     <br/><br/><br/><br/>
                     <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>+ Vehicle</Button>
@@ -60,7 +59,7 @@ class Vehicles extends Component {
                                     <td>{vehicle.purchasedDate}</td>
                                     <td>{vehicle.engineNo}</td>
                                     <td>
-                                        <button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button>
+                                        <Link to={'/admin/vehicles/' + vehicle.id}><button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button></Link>
                                     </td>
                                 </tr> 
                             )
@@ -68,7 +67,6 @@ class Vehicles extends Component {
                         </tbody>
                     </table>
                 </div>
-            // </div>
     )
         }
 }

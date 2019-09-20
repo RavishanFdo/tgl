@@ -40,6 +40,7 @@ export const addCustomer = (newCustomer) => {
                     email: newCustomer.email,
                     mobile: newCustomer.mobile,
                     dob: newCustomer.dob,
+                    nic: newCustomer.nic,
                     visibility: '1',
                     createdAt: new Date()
                 })
@@ -94,16 +95,16 @@ export const addDriver = (newDriver) => {
     }
 }
 
-export const editCustomer = (customerId, data) => {
+export const editUser = (customerId, data, collec) => {
 
     return(dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        firestore.collection('customers').doc(customerId).update({
+        firestore.collection(collec).doc(customerId).update({
             ...data
         }).then(() => {
-            dispatch({type: 'CUSTOMER_UPDATED'});
+            dispatch({type: 'DOCUMENT_UPDATED'});
         }).catch((err) => {
-            dispatch({type: 'ERROR_UPDATING_CUSTOMER', err});
+            dispatch({type: 'ERROR_UPDATING_DOCUMENT', err});
         })
     }
 }

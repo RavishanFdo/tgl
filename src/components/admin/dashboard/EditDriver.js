@@ -4,25 +4,25 @@ import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {editUser} from '../../../store/actions/adminActions'
 
-class EditCustomer extends Component {
+class EditDriver extends Component {
 
     state = {
-        id: '',
         email: '',
-        password: '',
         firstName: '',
         lastName: '',
         mobile: '',
         dob: '',
+        licenseNo: '',
+        nic: '',
         loading: 1,
         updated: 1
-
     }
+
     componentWillReceiveProps(nextProps) {
         
-        if(this.props.customer){
+        if(this.props.driver){
             this.setState({
-                ...nextProps.customer[0],loading: 0,updated: !this.state.updated
+                ...nextProps.driver[0],loading: 0,updated: !this.state.updated
             });
         }
     }
@@ -40,7 +40,7 @@ class EditCustomer extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.editUser(this.props.id, this.state, 'customers')
+        this.props.editUser(this.props.id, this.state, 'drivers')
         this.setState({
             updated: 0
         })
@@ -49,7 +49,7 @@ class EditCustomer extends Component {
     render() {
         const load = this.state.loading === 0 ? (
             <div className="container">
-                    <h2 className="center" style={{paddingTop: '100px'}}>Edit Customer</h2><br/><br/>
+                    <h2 className="center" style={{paddingTop: '100px'}}>Edit Driver</h2><br/><br/>
                     <div className="green-text center">
                         <h4>{this.state.updated ? "Updated Successfully" : null}</h4>
                     </div>
@@ -77,12 +77,17 @@ class EditCustomer extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="input-field col-5 row ">
+                            <div className="input-field col-3 row ">
                                 <h6 className='blue-text'>NIC</h6>
                                 <input placeholder="NIC No" type="text" id="nic" value={this.state.nic}  onChange={this.handleChange} required />
                             </div>
-                            <div className='col-2'></div>
-                            <div className="input-field col-5 row">
+                            <div className='col-1'></div>
+                            <div className="input-field col-3 row">
+                                <h6 className='blue-text'>License No</h6>
+                                <input placeholder="License No" type="text" id="licenseNo" value={this.state.licenseNo}  onChange={this.handleChange} required />
+                            </div>
+                            <div className='col-1'></div>
+                            <div className="input-field col-3 row">
                                 <h6 className='blue-text'>Email</h6>
                                 <input placeholder="Email" type="email" id="email" value={this.state.email}  onChange={this.handleChange} required />
                             </div>
@@ -103,21 +108,21 @@ const mapStateToProps = (state, ownProps) => {
     let id = ownProps.match.params.id;
     return{
         id: id,
-        customer: state.firestore.ordered.customers,
+        driver: state.firestore.ordered.drivers,
     }
     
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        editUser: (id, customer, collec) => dispatch(editUser(id,customer,collec))
+        editUser: (id, driver, collec) => dispatch(editUser(id, driver, collec))
     }
 }
 
 export default compose(
     connect(mapStateToProps,mapDispatchToProps),
     firestoreConnect(props => [{
-        collection: 'customers',
+        collection: 'drivers',
         doc: props.id
     }])
-)(EditCustomer)
+)(EditDriver)
