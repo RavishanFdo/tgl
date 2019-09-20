@@ -22,6 +22,12 @@ const adminReducer = (state = initState, action) => {
         case 'FAILED_TO_ADD_DRIVER':
             console.log('failed to add driver', action.err)
             return state;
+        case 'CUSTOMER_UPDATED' :
+            console.log('customer updated')
+            return state;
+        case 'ERROR_UPDATING_CUSTOMER' :
+            console.log('error updating customer', action.err)
+            return state
         default:
             return state
     }

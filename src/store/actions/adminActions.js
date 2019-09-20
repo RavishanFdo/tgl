@@ -93,3 +93,17 @@ export const addDriver = (newDriver) => {
         })
     }
 }
+
+export const editCustomer = (customerId, data) => {
+
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('customers').doc(customerId).update({
+            ...data
+        }).then(() => {
+            dispatch({type: 'CUSTOMER_UPDATED'});
+        }).catch((err) => {
+            dispatch({type: 'ERROR_UPDATING_CUSTOMER', err});
+        })
+    }
+}

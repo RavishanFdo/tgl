@@ -4,7 +4,8 @@ import AddCustomer from './AddCustomer'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
+import moment from 'moment'
 
 
 class Customers extends Component {
@@ -50,9 +51,9 @@ class Customers extends Component {
                                 <td>{customer.firstName + ' ' + customer.lastName}</td>
                                 <td>{customer.email}</td>
                                 <td>{customer.mobile}</td>
-                                <td>{customer.id}</td>
+                                <td>{moment(customer.createdAt.toDate()).format("MMM Do YYYY")}</td>
                                 <td>
-                                    <button type="button" data-toggle="modal" data-id="" class="edit-details btn btn-primary" data-target="#edit">View</button>
+                                    <Link to={'/admin/customers/' + customer.id}><button type="button" data-toggle="modal" data-id="" class="edit-details btn btn-primary" data-target="#edit">View</button></Link>
                                 </td>
                             </tr>
                         )

@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {Redirect} from 'react-router-dom'
+import moment  from 'moment'
 
 
 
@@ -55,7 +56,7 @@ class Drivers extends Component {
                                 <td className="center-align">{driver.licenseNo}</td>
                                 <td className="center-align">{driver.nic}</td>
                                 <td className="center-align">{driver.mobile}</td>
-                                <td className="center-align">{driver.id}</td>
+                                <td className="center-align">{moment(driver.createdAt.toDate()).format("MMM Do YYYY")}</td>
                                 <td className="center-align"><Badge variant="primary">On Hire</Badge></td>
                                 <td className="center-align">
                                     <button type="button" data-toggle="modal" data-id="" class="edit-details btn btn-primary" data-target="#edit">View</button>

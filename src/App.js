@@ -11,7 +11,6 @@ import SignUp from './components/auth/SignUp'
 import {connect} from 'react-redux'
 
 // Admin
-// import AdminNav from './components/admin/AdminNav'
 import AdminDashboard from './components/admin/dashboard/AdminDashboard'
 import Customers from './components/admin/dashboard/Customers'
 import AddCustomer from './components/admin/dashboard/AddCustomer'
@@ -22,6 +21,9 @@ import Hires from './components/admin/dashboard/Hires'
 import Drivers from './components/admin/dashboard/Drivers'
 import Vehicles from './components/admin/dashboard/Vehicles'
 import AdminSidebar from './components/admin/layout/AdminSidebar'
+import HireRequests from './components/admin/dashboard/HireRequests'
+import OngoingHires from './components/admin/dashboard/OngoingHires'
+import EditCustomer from './components/admin/dashboard/EditCustomer'
 
 
 function App(props) {
@@ -47,7 +49,7 @@ function App(props) {
               <Route path='/signup' component={SignUp} />
               
               <Route exact path='/admin' component={AdminDashboard} />
-              <Route path='/admin/customers' component={Customers} />
+              <Route exact path='/admin/customers' component={Customers} />
               <Route path='/admin/addcustomer' component={AddCustomer} />
               <Route path='/admin/drivers' component={Drivers} />
               <Route path='/admin/adddriver' component={AddDriver} />
@@ -55,6 +57,9 @@ function App(props) {
               <Route path='/admin/addvehicle' component={AddVehicle} />
               <Route path='/admin/addhire' component={AddHire} />
               <Route path='/admin/hires' component={Hires} />
+              <Route path='/admin/hirerequests' component={HireRequests} />
+              <Route path='/admin/ongoinghires' component={OngoingHires} />
+              <Route path='/admin/customers/:id' component={EditCustomer} />
             </Switch>
           </div>
         </div>

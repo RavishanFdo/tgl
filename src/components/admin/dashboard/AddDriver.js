@@ -23,6 +23,11 @@ class AddDriver extends Component {
         })
     }
 
+    handleDate = (e) => {
+        e.preventDefault();
+        e.target.type = 'date'
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         // console.log(this.state);
@@ -52,7 +57,7 @@ class AddDriver extends Component {
                                 <input placeholder="Mobile" type="text" id="mobile" onChange={this.handleChange} required />
                             </div>
                             <div className="input-field col-6">
-                                <input placeholder="Date of Birth" type="date" id="dob" onChange={this.handleChange} required />
+                                <input placeholder="Date of Birth" type="text" onFocus={this.handleDate} id="dob" onChange={this.handleChange} required />
                             </div>
                         </div>
                         <div className="row">
