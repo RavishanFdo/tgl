@@ -31,7 +31,7 @@ const OngoingExports = ({ongoingExportHires}) => {
                                 <td className="center-align">{exp.driverId}</td>
                                 <td className="center-align">{exp.customerId}</td>
                                 <td className="center-align">{exp.vehicleId}</td>
-                                <td className="center-align"><Badge variant="primary" className="black-text">Ongoing</Badge></td>
+                                <td className="center-align"><Badge variant="warning" className="black-text">Ongoing</Badge></td>
                                 <td className="center-align">
                                     <button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button>
                                 </td>

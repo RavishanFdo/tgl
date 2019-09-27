@@ -18,8 +18,8 @@ class HireRequests extends Component {
         const {auth} = this.props
         if (!auth.uid) return <Redirect to='/signin' />
 
-        const importHireRequests = this.props.hires.filter(item => item.hireType === "import" && item.completed === '0' && item.driverAccepted === '0')
-        const exportHireRequests = this.props.hires.filter(item => item.hireType === "export" && item.completed === '0' && item.driverAccepted === '0')
+        const importHireRequests = this.props.hires.filter(item => item.hireType === "import" && item.hireStatus === "request")
+        const exportHireRequests = this.props.hires.filter(item => item.hireType === "export" && item.hireStatus === "request")
         
         return (
         // <div className="main-panel">
