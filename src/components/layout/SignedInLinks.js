@@ -7,10 +7,10 @@ import {signOut} from '../../store/actions/authActions'
 const SignedInLinks = (props) => {
     return(
         <Navbar bg="dark" variant="dark" style={{ minWidth: 700, position: 'fixed' }}>
-            <div className="container">
+            <div className="container" >
                 <NavLink to='/'style={{ minWidth: 300 }} ><h3>Trans Global Logistics</h3></NavLink>
-                <Nav className="mr-auto right-align">
-                    <Nav.Link><NavLink to='/'>Home</NavLink></Nav.Link>
+                <Nav className="mr-auto right-align" >
+                    <Nav.Link><NavLink to='/cust/Home'>Home</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/about'>About</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/services'>Services</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/contact'>Contact</NavLink></Nav.Link>
