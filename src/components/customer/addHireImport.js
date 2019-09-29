@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-// import {NavLink} from 'react-router-dom'
 import Datetime from 'react-datetime'
 // import {connect} from 'react-redux'
+// import {NavLink} from 'react-router-dom'
 
 class AddHireImport extends Component {
     state = {

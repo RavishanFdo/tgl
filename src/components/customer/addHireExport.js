@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Datetime from 'react-datetime'
 // import {connect} from 'react-redux'
-// import {addExportHire} from '../../../store/actions/adminHireActions'
 
 class AddHireExport extends Component {
     state = {
