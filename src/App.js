@@ -29,14 +29,11 @@ import EditCustomer from './components/admin/dashboard/EditCustomer'
 import EditDriver from './components/admin/dashboard/EditDriver'
 import EditVehicle from './components/admin/dashboard/EditVehicle'
 
-<<<<<<< Updated upstream
-=======
 //customer
 import CustomerAddHire from './components/customer/customerAddHire'
 import Dashboard from './components/customer/dashboard'
 import Profile from './components/customer/profile'
 
->>>>>>> Stashed changes
 
 function App(props) {
 
@@ -76,14 +73,11 @@ function App(props) {
               <Route path='/admin/customers/:id' component={EditCustomer} />
               <Route path='/admin/drivers/:id' component={EditDriver} />
               <Route path='/admin/vehicles/:id' component={EditVehicle} />
-<<<<<<< Updated upstream
-=======
 
               <Route path='/cust/addHire' component={CustomerAddHire}/>
               <Route path='/cust/Home' component={Dashboard}/>
               <Route path='/cust/profile' component={Profile}/>
 
->>>>>>> Stashed changes
             </Switch>
           </div>
         </div>
