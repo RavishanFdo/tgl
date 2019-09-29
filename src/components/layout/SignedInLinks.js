@@ -14,7 +14,7 @@ const SignedInLinks = (props) => {
                     <Nav.Link><NavLink to='/about'>About</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/services'>Services</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/contact'>Contact</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/'>Profile</NavLink></Nav.Link>
+                    <Nav.Link><NavLink to='/cust/profile'>Profile</NavLink></Nav.Link>
                     <Nav.Link><Button onClick={props.signOut}>Logout</Button></Nav.Link>
                 </Nav>
             </div>
