@@ -6,6 +6,11 @@ const hStyle = {
     fontSize: '64px',
     margin:'40px'
 }
+const imgStyle={
+    // borderRadius:'30%',
+    height:'100px',
+    width:'150px',
+}
 
 class Dashboard extends React.Component{
     
@@ -21,20 +26,18 @@ class Dashboard extends React.Component{
                     <div className="col" >
                             <div className="card" >
                                 <div className="card-body">
-                                <img className="card-img-top" src={require('../../img/import.png')} alt="Card cap"/>
-                                <hr/>
-                                <h5 className="card-title">Add Your Hire Here</h5>
-                                <p className="card-text"><Link to='/cust/addHire'><button className="btn">ADD HIRE</button> </Link></p>
+                                <img className="card-img-top " src={require('../../img/import.png')} alt="Card cap" style={ imgStyle}/>
+                                <h5 className="card-title text-right">Add Your Hire Here</h5>
+                                <p className="card-text text-right"><Link to='/cust/addHire'><button className="btn btn-info">ADD HIRE</button> </Link></p>
                                 </div>
                             </div>
                     </div>
                     <div className="col" >
                         <div className="card" >
                             <div className="card-body">
-                            <img className="card-img-top" src={require('../../img/manage.png')} alt="Card cap"/>
-                            <hr/>
-                            <h5 className="card-title">Manage Your Hires Here</h5>
-                            <p className="card-text"><Link to='/'><button className="btn ">Manage Hires</button></Link></p>
+                            <img className="card-img-top" src={require('../../img/manage.png')} alt="Card cap" style={ imgStyle}/>
+                            <h5 className="card-title text-right">Manage Your Hires Here</h5>
+                            <p className="card-text text-right"><Link to='/'><button className="btn btn-info ">Manage Hires</button></Link></p>
                             </div>
                         </div>
                  </div>

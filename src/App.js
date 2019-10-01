@@ -31,7 +31,8 @@ import EditVehicle from './components/admin/dashboard/EditVehicle'
 
 //customer
 import CustomerAddHire from './components/customer/customerAddHire'
-import Dashboard from './components/customer/dashboard';
+import Dashboard from './components/customer/dashboard'
+import Profile from './components/customer/profile'
 
 function App(props) {
 
@@ -74,6 +75,7 @@ function App(props) {
 
               <Route path='/cust/addHire' component={CustomerAddHire}/>
               <Route path='/cust/Home' component={Dashboard}/>
+              <Route path='/cust/profile' component={Profile}/>
             </Switch>
           </div>
         </div>
