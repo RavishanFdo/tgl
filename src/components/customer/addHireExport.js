@@ -1,9 +1,6 @@
-
-
 import React, {Component} from 'react'
 import Datetime from 'react-datetime'
 // import {connect} from 'react-redux'
-// import {NavLink} from 'react-router-dom'
 
 class AddHireExport extends Component {
     state = {
@@ -12,8 +9,15 @@ class AddHireExport extends Component {
         pickupDatetime: '',
         cargoType: '',
         weight: '',
-        unloadingPort: '',
+        loadingPort: '',
+        loadingDatetime: '',
+        driverId: '',
+        customerId: '',
+        vehicleId: '',
         remarks: '',
+        completed: '0',
+        driverAccepted: '0',
+        declined: '0',
     }
 
     handleChange = (e) => {
@@ -24,8 +28,8 @@ class AddHireExport extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state)
-        this.props.addImportHire(this.state)
+        // console.log(this.state);
+        this.props.addExportHire(this.state)
     }
 
     handlePickupDate = (e) => {
@@ -34,7 +38,11 @@ class AddHireExport extends Component {
         })
     }
 
-    
+    handleLoadingDate = (e) => {
+        this.setState({
+            loadingDatetime: e._d
+        })
+    }
 
     handleContainerType = (e) => {
         if(e.target.value){
@@ -48,7 +56,7 @@ class AddHireExport extends Component {
         return (
             <div>
                 <br/><br/>
-                <h2 className="center">Add Import</h2><br/><br/>
+                <h2 className="center">Add Export</h2><br/><br/>
                 <form onSubmit={this.handleSubmit} >
                     <div className="row col-4">
                         <select className="form-control" placeholder="Container Type" id="containerType" onChange={this.handleContainerType} required>
@@ -97,5 +105,10 @@ class AddHireExport extends Component {
     }
 }
 
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addExportHire: (exportHire) => dispatch(addExportHire(exportHire))
+//     }
+// }
 
 export default AddHireExport;

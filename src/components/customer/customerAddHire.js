@@ -1,7 +1,8 @@
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import AddHireImport from './addHireImport'
-import AddHireExport from './addHireExport'
+import AddHireExports from './addHireExport'
+
 
 
 class CustomerAddHire extends React.Component{
@@ -20,7 +21,7 @@ class CustomerAddHire extends React.Component{
                         <AddHireImport />
                     </TabPanel>
                     <TabPanel>
-                        <AddHireExport />
+                        <AddHireExports />
                     </TabPanel>
                 </Tabs>
             </div>
