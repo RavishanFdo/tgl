@@ -66,9 +66,5 @@ export default compose(
     firestoreConnect(props => [{
         collection: 'hires',
         doc: props.id,
-        // subcollections: [
-        //     { collection: 'customers', doc: '' },
-        //     { collection: 'drivers', doc  }
-        // ]
     }])
 )(ManageHire)
