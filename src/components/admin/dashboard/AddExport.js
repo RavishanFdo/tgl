@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
-import Datetime from 'react-datetime'
+import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {addExportHire} from '../../../store/actions/adminHireActions'
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
+// import { thisExpression } from '@babel/types'
 
 class AddExport extends Component {
     state = {
@@ -13,12 +16,16 @@ class AddExport extends Component {
         loadingPort: '',
         loadingDatetime: '',
         driverId: '',
+        driverName: '',
         customerId: '',
+        customerName: '',
         vehicleId: '',
+        vehicleNo: '',
         remarks: '',
-        completed: '0',
-        driverAccepted: '0',
-        declined: '0',
+        loading: 1,
+        freeDrivers: '',
+        availableCustomers: '',
+        redir: 0
     }
 
     handleChange = (e) => {
@@ -29,20 +36,15 @@ class AddExport extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state);
         this.props.addExportHire(this.state)
-    }
-
-    handlePickupDate = (e) => {
         this.setState({
-            pickupDatetime: e._d
+            redir : 1
         })
     }
 
-    handleLoadingDate = (e) => {
-        this.setState({
-            loadingDatetime: e._d
-        })
+    handleDate = (e) => {
+        e.preventDefault();
+        e.target.type = 'datetime-local'
     }
 
     handleContainerType = (e) => {
@@ -53,8 +55,101 @@ class AddExport extends Component {
         }
     }
 
+    handleCustomer = (e) => {
+        if(e.target.value){
+            const x = e.target.value.split('_')
+            this.setState({
+                customerId: x[0],
+                customerName: x[1]
+            })
+        }
+    }
+
+    getCustomers = (e) => {
+        if(this.props.customers){
+            const availableCustomers = this.props.customers.sort((a,b) => { return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()}).reverse()
+            this.setState({
+                availableCustomers: availableCustomers
+            })
+        }
+    }
+
+    handlePickup = (e) => {
+        const dateTime = e.target.value
+        if(this.props.hires){
+            const driversOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.driverId)
+            const vehiclesOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.vehicleId)
+            this.setState({
+                driversOnHire: driversOnHire,
+                vehiclesOnHire: vehiclesOnHire
+            });
+        }
+    }
+
+    availableDrivers = (e) => {
+        if(this.props.drivers){
+            const unavailable = this.state.driversOnHire
+            const allDrivers = this.props.drivers
+            const freeDrivers = allDrivers.filter(function(item) {
+                return !unavailable.includes(item.id); 
+              })
+            this.setState({
+                freeDrivers: freeDrivers
+            });
+        }
+    }
+
+    handleDriver = (e) => {
+        if(e.target.value){
+            const y = e.target.value.split('_')
+            this.setState({
+                driverId: y[0],
+                driverName: y[1]
+            })
+        }
+    }
+
+    availableVehicles = (e) => {
+        if(this.props.vehicles){
+            const unavailable = this.state.vehiclesOnHire
+            const allVehicles = this.props.vehicles
+            const freeVehicles = allVehicles.filter(function(item) {
+                return !unavailable.includes(item.id); 
+              })
+            this.setState({
+                freeVehicles: freeVehicles
+            });
+        }
+    }
+
+    handleVehicle = (e) => {
+        if(e.target.value){
+            const x = e.target.value.split('_')
+            this.setState({
+                vehicleId: x[0],
+                vehicleNo: x[1]
+            })
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        
+        if(this.props.customers && this.props.drivers){
+            this.setState({
+                loading: 0,
+            });
+        }
+        
+    }
+
     render() {
+        if(this.state.redir === 1){
+            return <Redirect to='/admin/hires' />
+        }
         return (
+            this.state.loading === 1 ? (
+                <div><br/><br/><br/><br/><h1>Loading</h1></div>
+            ) :
             <div>
                 <br/><br/>
                 <h2 className="center">Add Export</h2><br/><br/>
@@ -71,7 +166,7 @@ class AddExport extends Component {
                             <input placeholder="Pickup Location" type="text" id="pickupLocation" onChange={this.handleChange} required />
                         </div>
                         <div className="input-field col-6">
-                            <Datetime id="pickupDatetime" onChange={this.handlePickupDate} required></Datetime>
+                            <input placeholder="Pickup Date and Time" onFocus={this.handleDate} type="text" id="pickupDatetime" onBlur={this.handlePickup} onChange={this.handleChange} required />    
                         </div>
                     </div>
                     <br/><hr/><h5>Cargo Details</h5> <br/>
@@ -89,20 +184,36 @@ class AddExport extends Component {
                             <input placeholder="Loading Port" type="text" id="loadingPort" onChange={this.handleChange} required/>
                         </div>
                         <div className="input-field col-6">
-                            <Datetime id="loadingDatetime" onChange={this.handleLoadingDate} required></Datetime>
+                            <input placeholder="Loading Date and Time" onFocus={this.handleDate} type="text" id="loadingDatetime" onChange={this.handleChange} required />
                         </div>
                     </div>
+                    <br/><hr/><h5>Customer</h5><br/>
                     <div className="row">
-                        <div className="input-field col-4">
-                            <input placeholder="Customer" type="text" id="customerId" onChange={this.handleChange} required/>
+                        <div className="input-field col-6">
+                            <select className="form-control" id="customerId" onFocus={this.getCustomers} onChange={this.handleCustomer}>
+                                {/* {this.props.customers.sort((a,b) => { return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()}).reverse().map((x, i) => {return (<option value={x.id + "_" + x.firstName + " " + x.lastName} key={i}>{x.firstName + " " + x.lastName + " - " + x.mobile}</option>)})} */}
+                                {this.state.availableCustomers ?  this.state.availableCustomers.map((x, i) => {return (<option value={x.id + "_" + x.firstName + " " + x.lastName} key={i}>{x.firstName + " " + x.lastName + " - " + x.mobile}</option>)}) : null}
+
+                            </select>
                         </div>
-                        <div className="input-field col-4">
-                            <input placeholder="Driver" type="text" id="driverId" onChange={this.handleChange} required/>
+                    </div>
+                    <br/><hr/><h5>Driver</h5><br/>
+                    <div className="row">
+                        <div className="input-field col-6">
+                            <select className="form-control" id="driverId" onFocus={this.availableDrivers} onChange={this.handleDriver} onBlur={this.handleDriver}>
+                                {this.state.freeDrivers ? this.state.freeDrivers.map((x, i) => {return (<option value={x.id + "_" + x.firstName + " " + x.lastName} key={i}>{x.firstName + " " + x.lastName + " - " + x.mobile}</option>)}) : null}
+                            </select>
                         </div>
-                        <div className="input-field col-4">
-                            <input placeholder="Vehicle" type="text" id="vehicleId" onChange={this.handleChange} required />
+                    </div>
+                    <br/><hr/><h5>Vehicle</h5><br/>
+                    <div className="row">
+                        <div className="input-field col-6">
+                            <select className="form-control" id="vehicleId" onChange={this.handleVehicle} onFocus={this.availableVehicles} onBlur={this.handleVehicle}>
+                                {this.state.freeVehicles ? this.state.freeVehicles.map((x, i) => {return (<option value={x.id + "_" + x.vehicleNo} key={i}>{x.vehicleNo + " - " + x.trailerNo}</option>)}) : null}
+                            </select>
                         </div>
-                    </div><br/>
+                    </div>
+                    <br/>
                     <div className="input-field row col-12">
                         <textarea placeholder="Remarks" style={{ minHeight: 100 }} type="text" id="remarks" onChange={this.handleChange} />
                     </div>
@@ -117,10 +228,27 @@ class AddExport extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return{
+        customers: state.firestore.ordered.customers,
+        drivers: state.firestore.ordered.drivers,
+        vehicles: state.firestore.ordered.vehicles,
+        hires: state.firestore.ordered.hires
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         addExportHire: (exportHire) => dispatch(addExportHire(exportHire))
     }
 }
 
-export default connect(null,mapDispatchToProps)(AddExport);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+        {collection: 'customers'},
+        {collection: 'drivers'},
+        {collection: 'vehicles'},
+        {collection: 'hires'}
+    ])
+)(AddExport);

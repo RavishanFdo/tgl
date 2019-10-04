@@ -1,6 +1,7 @@
 import React from 'react'
 import {Badge} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import moment from 'moment'
 
 const Exports = ({exportHires}) => {
     return(
@@ -25,12 +26,12 @@ const Exports = ({exportHires}) => {
                             return (
                                 <tr key={exp.id}>
                                 <td className="center-align">{exp.containerType}</td>
-                                <td className="center-align">{exp.pickupDatetime.seconds}</td>
+                                <td className="center-align">{moment(exp.pickupDatetime).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                 <td className="center-align">{exp.cargoType}</td>
-                                <td className="center-align">{exp.loadingDatetime.seconds}</td>
-                                <td className="center-align">{exp.driverId}</td>
-                                <td className="center-align">{exp.customerId}</td>
-                                <td className="center-align">{exp.vehicleId}</td>
+                                <td className="center-align">{moment(exp.loadingDatetime).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                                <td className="center-align">{exp.driverName}</td>
+                                <td className="center-align">{exp.customerName}</td>
+                                <td className="center-align">{exp.vehicleNo}</td>
                                 <td className="center-align">{exp.hireStatus === "completed" ? <Badge variant="success" className="black-text">Completed</Badge> : (
                                     exp.hireStatus === "request" ? <Badge variant="primary" className="black-text">Request</Badge> : (
                                         exp.hireStatus === "driverPending" ? <Badge variant="danger" className="black-text">Pending</Badge> : <Badge variant="warning" className="black-text">Ongoing</Badge>

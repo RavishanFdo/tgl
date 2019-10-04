@@ -19,8 +19,8 @@ class Hires extends Component {
         const {auth} = this.props
         if (!auth.uid) return <Redirect to='/signin' />
 
-        const importHires = this.props.hires.filter(item => item.hireType === "import")
-        const exportHires = this.props.hires.filter(item => item.hireType === "export")
+        const importHires = this.props.hires.filter(item => item.hireType === "import" && item.hireStatus === "completed" || item.hireStatus === "driverPending" )
+        const exportHires = this.props.hires.filter(item => item.hireType === "export" && item.hireStatus === "completed" || item.hireStatus === "driverPending")
         
         return (
         // <div className="main-panel">
@@ -45,7 +45,7 @@ class Hires extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
         auth: state.firebase.auth,
         hires: state.firestore.ordered.hires

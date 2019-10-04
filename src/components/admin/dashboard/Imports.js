@@ -1,6 +1,7 @@
 import React from 'react'
 import {Badge} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import moment from 'moment'
 
 const Imports = ({importHires}) => {
     return(
@@ -26,13 +27,13 @@ const Imports = ({importHires}) => {
                         return(
                             <tr key={imp.id}>
                                 <td className="center-align">{imp.containerType}</td>
-                                <td className="center-align">{imp.pickupDatetime.seconds}</td>
+                                <td className="center-align">{moment(imp.pickupDatetime).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                 <td className="center-align">{imp.cargoType}</td>
-                                <td className="center-align">{imp.vesselArrivalDatetime.seconds}</td>
+                                <td className="center-align">{moment(imp.vesselArrivalDatetime).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                 <td className="center-align">{imp.destination}</td>
-                                <td className="center-align">{imp.driverId}</td>
-                                <td className="center-align">{imp.customerId}</td>
-                                <td className="center-align">{imp.vehicleId}</td>
+                                <td className="center-align">{imp.driverName}</td>
+                                <td className="center-align">{imp.customerName}</td>
+                                <td className="center-align">{imp.vehicleNo}</td>
                                 <td className="center-align">{imp.hireStatus === "completed" ? <Badge variant="success" className="black-text">Completed</Badge> : (
                                     imp.hireStatus === "request" ? <Badge variant="primary" className="black-text">Request</Badge> : (
                                         imp.hireStatus === "driverPending" ? <Badge variant="danger" className="black-text">Pending</Badge> : <Badge variant="warning" className="black-text">Ongoing</Badge>
