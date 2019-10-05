@@ -107,7 +107,7 @@ class ManageCompletedHires extends Component {
             }
         });
 
-        const MyDocument = this.props.hire.hireType === "import" && this.state.loading === 0 ? (
+        const MyDocument = this.props.hire[0].hireType === "import" && this.state.loading === 0 ? (
             <Document>
                 <Page style={styles.body}>
                     <View>
@@ -133,7 +133,7 @@ class ManageCompletedHires extends Component {
                         </View>
                         <View style={styles.tableRow}> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{moment(this.props.hire.completedDatetime.toDate()).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
+                                <Text style={styles.tableCell}>{moment(this.props.hire[0].completedDatetime.toDate()).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
                             </View> 
                             <View style={styles.tableCol}> 
                                 <Text style={styles.tableCell}>{this.state.customer[0].firstName + ' ' + this.state.customer[0].lastName}</Text> 
@@ -166,13 +166,13 @@ class ManageCompletedHires extends Component {
                         </View>
                         <View style={styles.tableRow}> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{this.props.hire.containerType + "ft"}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].containerType + "ft"}</Text> 
                             </View> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{moment(this.props.hire.pickupDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
+                                <Text style={styles.tableCell}>{moment(this.props.hire[0].pickupDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
                             </View> 
                             <View style={styles.tableCol}>
-                                <Text style={styles.tableCell}>{this.props.hire.pickupLocation}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].pickupLocation}</Text> 
                             </View>
                         </View>        
                     </View>
@@ -199,19 +199,19 @@ class ManageCompletedHires extends Component {
                         </View>
                         <View style={styles.tableRow}> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{this.props.hire.cargoType}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].cargoType}</Text> 
                             </View> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{this.props.weight}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].weight}</Text> 
                             </View> 
                             <View style={styles.tableCol}>
-                                <Text style={styles.tableCell}>{moment(this.props.hire.vesselArrivalDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
+                                <Text style={styles.tableCell}>{moment(this.props.hire[0].vesselArrivalDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
                             </View>
                             <View style={styles.tableCol}>
-                                <Text style={styles.tableCell}>{this.props.hire.unloadingPort}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].unloadingPort}</Text> 
                             </View>
                             <View style={styles.tableCol}>
-                                <Text style={styles.tableCell}>{this.props.hire.destination}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].destination}</Text> 
                             </View>
                         </View>        
                     </View>
@@ -290,7 +290,7 @@ class ManageCompletedHires extends Component {
                 </Page>
             </Document>
 
-        ) : this.props.hire.hireType === "export" && this.state.loading === 0 ? (
+        ) : this.props.hire[0].hireType === "export" && this.state.loading === 0 ? (
             <Document>
                 <Page style={styles.body}>
                     <View>
@@ -316,7 +316,7 @@ class ManageCompletedHires extends Component {
                         </View>
                         <View style={styles.tableRow}> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{moment(this.props.hire.completedDatetime.toDate()).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
+                                <Text style={styles.tableCell}>{moment(this.props.hire[0].completedDatetime.toDate()).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
                             </View> 
                             <View style={styles.tableCol}> 
                                 <Text style={styles.tableCell}>{this.state.customer[0].firstName + ' ' + this.state.customer[0].lastName}</Text> 
@@ -349,13 +349,13 @@ class ManageCompletedHires extends Component {
                         </View>
                         <View style={styles.tableRow}> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{this.props.hire.containerType + "ft"}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].containerType + "ft"}</Text> 
                             </View> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{moment(this.props.hire.pickupDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
+                                <Text style={styles.tableCell}>{moment(this.props.hire[0].pickupDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
                             </View> 
                             <View style={styles.tableCol}>
-                                <Text style={styles.tableCell}>{this.props.hire.pickupLocation}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].pickupLocation}</Text> 
                             </View>
                         </View>        
                     </View>
@@ -379,16 +379,16 @@ class ManageCompletedHires extends Component {
                         </View>
                         <View style={styles.tableRow}> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{this.props.hire.cargoType}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].cargoType}</Text> 
                             </View> 
                             <View style={styles.tableCol}> 
-                                <Text style={styles.tableCell}>{this.props.weight}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].weight}</Text> 
                             </View> 
                             <View style={styles.tableCol}>
-                                <Text style={styles.tableCell}>{moment(this.props.hire.loadingDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
+                                <Text style={styles.tableCell}>{moment(this.props.hire[0].loadingDatetime).format('MMMM Do YYYY, h:mm:ss a')}</Text> 
                             </View>
                             <View style={styles.tableCol}>
-                                <Text style={styles.tableCell}>{this.props.hire.loadingPort}</Text> 
+                                <Text style={styles.tableCell}>{this.props.hire[0].loadingPort}</Text> 
                             </View>
                         </View>        
                     </View>
@@ -491,8 +491,8 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect(props => [
-        {collection: 'customers',doc: props.hire.customerId,},
-        { collection: 'drivers', doc: props.hire.driverId },
-        { collection: 'vehicles', doc: props.hire.vehicleId }
+        {collection: 'customers',doc: props.hire[0].customerId,},
+        { collection: 'drivers', doc: props.hire[0].driverId },
+        { collection: 'vehicles', doc: props.hire[0].vehicleId }
     ])
 )(ManageCompletedHires)

@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {addExportHire} from '../../../store/actions/adminHireActions'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
-// import { thisExpression } from '@babel/types'
 
 class AddExport extends Component {
     state = {
@@ -74,27 +73,25 @@ class AddExport extends Component {
         }
     }
 
-    handlePickup = (e) => {
-        const dateTime = e.target.value
-        if(this.props.hires){
-            const driversOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.driverId)
-            const vehiclesOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.vehicleId)
-            this.setState({
-                driversOnHire: driversOnHire,
-                vehiclesOnHire: vehiclesOnHire
-            });
-        }
-    }
-
     availableDrivers = (e) => {
-        if(this.props.drivers){
-            const unavailable = this.state.driversOnHire
-            const allDrivers = this.props.drivers
-            const freeDrivers = allDrivers.filter(function(item) {
-                return !unavailable.includes(item.id); 
-              })
+
+        const dateTime = this.refs.pickup.value
+
+        if(dateTime){
+            if(this.props.hires && this.props.drivers){
+                const driversOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.driverId)
+
+                const allDrivers = this.props.drivers
+                const freeDrivers = allDrivers.filter(function(item) {
+                    return !driversOnHire.includes(item.id); 
+                  })
+                this.setState({
+                    freeDrivers: freeDrivers
+                });
+            }
+        }else{
             this.setState({
-                freeDrivers: freeDrivers
+                freeDrivers: [{id: 0, firstName: 'Please Select a', lastName: 'pickup date', mobile: ''}]
             });
         }
     }
@@ -110,14 +107,23 @@ class AddExport extends Component {
     }
 
     availableVehicles = (e) => {
-        if(this.props.vehicles){
-            const unavailable = this.state.vehiclesOnHire
-            const allVehicles = this.props.vehicles
-            const freeVehicles = allVehicles.filter(function(item) {
-                return !unavailable.includes(item.id); 
-              })
+        const dateTime = this.refs.pickup.value
+        
+        if(dateTime){
+            if(this.props.hires && this.props.vehicles){
+                const vehiclesOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.vehicleId)
+               
+                const allVehicles = this.props.vehicles
+                const freeVehicles = allVehicles.filter(function(item) {
+                    return !vehiclesOnHire.includes(item.id); 
+                  })
+                this.setState({
+                    freeVehicles: freeVehicles
+                });
+            }
+        }else{
             this.setState({
-                freeVehicles: freeVehicles
+                freeVehicles: [{id: 0, vehicleNo: 'Please Select a pickup date', trailerNo: ''}]
             });
         }
     }
@@ -166,7 +172,7 @@ class AddExport extends Component {
                             <input placeholder="Pickup Location" type="text" id="pickupLocation" onChange={this.handleChange} required />
                         </div>
                         <div className="input-field col-6">
-                            <input placeholder="Pickup Date and Time" onFocus={this.handleDate} type="text" id="pickupDatetime" onBlur={this.handlePickup} onChange={this.handleChange} required />    
+                            <input placeholder="Pickup Date and Time" onFocus={this.handleDate} ref="pickup" type="text" id="pickupDatetime"  onChange={this.handleChange} required />    
                         </div>
                     </div>
                     <br/><hr/><h5>Cargo Details</h5> <br/>

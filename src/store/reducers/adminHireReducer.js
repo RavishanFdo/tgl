@@ -20,6 +20,18 @@ const adminHireReducer = (state = initState, action) => {
         case 'ADD_EXPORT_ERROR':
             console.log('Add Export error',action.err)
             return state;
+        case 'HIRE_REQUEST_UPDATED':
+            console.log('hire request updated')
+            return state;
+        case 'ERROR_UPDATING_HIRE_REQUEST':
+            console.log('Error updating hire request', action.err)
+            return state;
+        case 'HIRE_REQUEST_DECLINED':
+            console.log('Hire request declined')
+            return state;
+        case 'ERROR_DECLINING_HIRE_REQUEST':
+            console.log('Error declining hire request')
+            return state;
         default:
             return state
     }

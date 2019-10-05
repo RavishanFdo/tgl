@@ -58,3 +58,36 @@ export const addExportHire = (exportHire) => {
 
     }
 };
+
+export const acceptHireRequest = (id, hireRequest) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('hires').doc(id).update({
+            driverName: hireRequest.driverName,
+            driverId: hireRequest.driverId,
+            vehicleId: hireRequest.vehicleId,
+            vehicleNo: hireRequest.vehicleNo,
+            hireStatus: 'driverPending',
+            remarks: hireRequest.remarks
+        }).then(() => {
+            dispatch({type: 'HIRE_REQUEST_UPDATED'});
+        }).catch((err) => {
+            dispatch({type: 'ERROR_UPDATING_HIRE_REQUEST', err})
+        })
+    }
+}
+
+export const declineHireRequest = (id, hireRequest) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('hires').doc(id).update({
+            hireStatus: 'declined',
+            remarks: hireRequest.remarks
+        }).then(() => {
+            dispatch({type: 'HIRE_REQUEST_DECLINED'});
+        }).catch((err) => {
+            dispatch({type: 'ERROR_DECLINING_HIRE_REQUEST', err})
+        })
+    }
+}
+

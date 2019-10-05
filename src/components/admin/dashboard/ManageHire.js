@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import ManageCompletedHires from './ManageCompletedHires'
+import ManageHireRequest from './ManageHireRequest'
 
 
 class ManageHire extends Component {
@@ -13,15 +14,15 @@ class ManageHire extends Component {
     }
 
     state = {
-        loading: 1
+        load: 1
     }
 
     componentWillReceiveProps(nextProps) {
         
         if(this.props.hire){
             this.setState({
-                ...nextProps.hire[0],
-                loading: 0,
+                // ...nextProps.hire[0],
+                load: 0,
             });
         }
         
@@ -29,24 +30,37 @@ class ManageHire extends Component {
 
     render() {
 
-        const {auth, id, hire} = this.props
-        // if (!auth.uid) return <Redirect to='/signin' />
+        // const {auth, id, hire} = this.props
+        // const hire = 
 
-        const load = this.state.loading === 0 && this.state.hireStatus === "completed" ? (
-            <div>
-                <ManageCompletedHires hire={this.props.hire[0]}></ManageCompletedHires>
-            </div>
+
+        // const load = this.state.load === 0 && this.props.hire.filter(item => item.hireType === "completed" && item.id === this.props.id) ? (
+        //     <div>
+        //         <ManageCompletedHires hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageCompletedHires>
+        //     </div>
             
-        ) : this.state.loading === 0 && this.state.hireStatus === "requested" ? (
-            <div>
+        // ) : 
+        //     <div id="content" className="container-fluid" role="main">
+        //         <ManageHireRequest hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageHireRequest>
+        //     </div>
 
-            </div>
-        ) : this.state.loading === 0 && this.state.hireStatus === "ongoing" ? (
-            <div>
+        // return <div>{load}</div>
 
-            </div>
+        const load = this.state.load === 0 ? (
+            this.props.hire.filter(item => item.id === this.props.id ).map(a => a.hireStatus)[0] === "completed" ?  (
+                <div>
+                    <ManageCompletedHires hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageCompletedHires>
+                </div>
+                
+            ) : 
+                <div id="content" className="container-fluid" role="main">
+                    <ManageHireRequest hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageHireRequest>
+                </div>
         ) : null
+
         return <div>{load}</div>
+
+        
     }
 }
 
@@ -65,6 +79,6 @@ export default compose(
     connect(mapStateToProps),
     firestoreConnect(props => [{
         collection: 'hires',
-        doc: props.id,
+        // doc: props.id,
     }])
 )(ManageHire)
