@@ -5,6 +5,8 @@ import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import ManageCompletedHires from './ManageCompletedHires'
 import ManageHireRequest from './ManageHireRequest'
+import ManagePendingHires from './ManagePendingHires';
+import ManageOngoingHire from './ManageOngoingHire';
 
 
 class ManageHire extends Component {
@@ -30,32 +32,26 @@ class ManageHire extends Component {
 
     render() {
 
-        // const {auth, id, hire} = this.props
-        // const hire = 
-
-
-        // const load = this.state.load === 0 && this.props.hire.filter(item => item.hireType === "completed" && item.id === this.props.id) ? (
-        //     <div>
-        //         <ManageCompletedHires hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageCompletedHires>
-        //     </div>
-            
-        // ) : 
-        //     <div id="content" className="container-fluid" role="main">
-        //         <ManageHireRequest hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageHireRequest>
-        //     </div>
-
-        // return <div>{load}</div>
-
         const load = this.state.load === 0 ? (
             this.props.hire.filter(item => item.id === this.props.id ).map(a => a.hireStatus)[0] === "completed" ?  (
                 <div>
                     <ManageCompletedHires hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageCompletedHires>
                 </div>
                 
-            ) : 
+            ) : this.props.hire.filter(item => item.id === this.props.id ).map(a => a.hireStatus)[0] === "request" ? (
                 <div id="content" className="container-fluid" role="main">
                     <ManageHireRequest hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageHireRequest>
                 </div>
+            ) : this.props.hire.filter(item => item.id === this.props.id ).map(a => a.hireStatus)[0] === "driverPending" ? (
+                <div id="content" className="container-fluid" role="main">
+                    <ManagePendingHires hire={this.props.hire.filter(item => item.id === this.props.id)}></ManagePendingHires>
+                </div>
+            ) : (
+                <div id="content" className="container-fluid" role="main">
+                    <ManageOngoingHire hire={this.props.hire.filter(item => item.id === this.props.id)}></ManageOngoingHire>
+                </div>
+            )
+                
         ) : null
 
         return <div>{load}</div>

@@ -32,6 +32,12 @@ const adminHireReducer = (state = initState, action) => {
         case 'ERROR_DECLINING_HIRE_REQUEST':
             console.log('Error declining hire request')
             return state;
+        case 'HIRE_COMPLETION_RECORDED':
+            console.log('Hire completed')
+            return state;
+        case 'ERROR_RECORDING_HIRE_COMPLETION':
+            console.log('error recording hire completion')
+            return state;
         default:
             return state
     }

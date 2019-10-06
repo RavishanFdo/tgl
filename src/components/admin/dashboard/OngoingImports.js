@@ -1,5 +1,7 @@
 import React from 'react'
 import {Badge} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+import moment from 'moment'
 
 const OngoingImports = ({ongoingImportHires}) => {
     if (!ongoingImportHires.length) return <div><br/><br/><h4>No Ongoing Imports</h4></div>
@@ -26,16 +28,16 @@ const OngoingImports = ({ongoingImportHires}) => {
                         return(
                             <tr key={imp.id}>
                                 <td className="center-align">{imp.containerType}</td>
-                                <td className="center-align">{imp.pickupDatetime.seconds}</td>
+                                <td className="center-align">{moment(imp.pickupDatetime).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                 <td className="center-align">{imp.cargoType}</td>
-                                <td className="center-align">{imp.vesselArrivalDatetime.seconds}</td>
+                                <td className="center-align">{moment(imp.vesselArrivalDatetime).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                 <td className="center-align">{imp.destination}</td>
-                                <td className="center-align">{imp.driverId}</td>
-                                <td className="center-align">{imp.customerId}</td>
+                                <td className="center-align">{imp.driverName}</td>
+                                <td className="center-align">{imp.customerName}</td>
                                 <td className="center-align">{imp.vehicleId}</td>
                                 <td className="center-align"><Badge variant="warning" className="black-text">Ongoing</Badge></td>
                                 <td className="center-align">
-                                    <button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" data-target="#edit">View</button>
+                                    <Link to={'/admin/hires/' + imp.id}><button type="button" data-toggle="modal" data-id="" className="edit-details btn btn-primary" >View</button></Link>
                                 </td>
                             </tr> 
                         )

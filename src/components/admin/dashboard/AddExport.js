@@ -79,7 +79,7 @@ class AddExport extends Component {
 
         if(dateTime){
             if(this.props.hires && this.props.drivers){
-                const driversOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.driverId)
+                const driversOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.driverId)
 
                 const allDrivers = this.props.drivers
                 const freeDrivers = allDrivers.filter(function(item) {
@@ -111,7 +111,7 @@ class AddExport extends Component {
         
         if(dateTime){
             if(this.props.hires && this.props.vehicles){
-                const vehiclesOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] == dateTime.toString().split('T')[0]).map(a => a.vehicleId)
+                const vehiclesOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.vehicleId)
                
                 const allVehicles = this.props.vehicles
                 const freeVehicles = allVehicles.filter(function(item) {

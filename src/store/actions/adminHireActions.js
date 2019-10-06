@@ -82,11 +82,29 @@ export const declineHireRequest = (id, hireRequest) => {
         const firestore = getFirestore();
         firestore.collection('hires').doc(id).update({
             hireStatus: 'declined',
+            driverName: '',
+            driverId: '',
+            vehicleId: '',
+            vehicleNo: '',
             remarks: hireRequest.remarks
         }).then(() => {
             dispatch({type: 'HIRE_REQUEST_DECLINED'});
         }).catch((err) => {
             dispatch({type: 'ERROR_DECLINING_HIRE_REQUEST', err})
+        })
+    }
+}
+
+export const completeHire = (id) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('hires').doc(id).update({
+            hireStatus: 'completed',
+            completedDatetime: new Date()
+        }).then(() => {
+            dispatch({type: 'HIRE_COMPLETION_RECORDED'});
+        }).catch((err) => {
+            dispatch({type: 'ERROR_RECORDING_HIRE_COMPLETION', err})
         })
     }
 }
