@@ -24,11 +24,11 @@ import AdminSidebar from './components/admin/layout/AdminSidebar'
 import HireRequests from './components/admin/dashboard/HireRequests'
 import OngoingHires from './components/admin/dashboard/OngoingHires'
 import ManageHire from './components/admin/dashboard/ManageHire'
-import ManageHireRequest from './components/admin/dashboard/ManageHireRequest'
+// import ManageHireRequest from './components/admin/dashboard/ManageHireRequest'
 
-import EditCustomer from './components/admin/dashboard/EditCustomer'
-import EditDriver from './components/admin/dashboard/EditDriver'
-import EditVehicle from './components/admin/dashboard/EditVehicle'
+import ManageCustomer from './components/admin/dashboard/ManageCustomer'
+import ManageDriver from './components/admin/dashboard/ManageDriver'
+import ManageVehicle from './components/admin/dashboard/ManageVehicle'
 
 
 function App(props) {
@@ -67,9 +67,9 @@ function App(props) {
               <Route path='/admin/ongoinghires' component={OngoingHires} />
               {/* <Route path='/admin/hires/:id' component={ManageHire} /> */}
 
-              <Route path='/admin/customers/:id' component={EditCustomer} />
-              <Route path='/admin/drivers/:id' component={EditDriver} />
-              <Route path='/admin/vehicles/:id' component={EditVehicle} />
+              <Route path='/admin/customers/:id' component={ManageCustomer} />
+              <Route path='/admin/drivers/:id' component={ManageDriver} />
+              <Route path='/admin/vehicles/:id' component={ManageVehicle} />
               <Route path='/admin/hires/:id' component={ManageHire} />
             </Switch>
           </div>

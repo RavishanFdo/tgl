@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 
 const Exports = ({exportHires}) => {
+    if (!exportHires.length) return <div><br/><br/><h4>No Exports Available</h4></div>
     return(
             <div>
                 <br/><br/>

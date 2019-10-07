@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {firestoreConnect} from 'react-redux-firebase'
-import {compose} from 'redux'
 import {editUser} from '../../../store/actions/adminActions'
 
 class EditDriver extends Component {
@@ -16,15 +14,6 @@ class EditDriver extends Component {
         nic: '',
         loading: 1,
         updated: 1
-    }
-
-    componentWillReceiveProps(nextProps) {
-        
-        if(this.props.driver){
-            this.setState({
-                ...nextProps.driver[0],loading: 0,updated: !this.state.updated
-            });
-        }
     }
 
     handleChange = (e) => {
@@ -42,14 +31,22 @@ class EditDriver extends Component {
         e.preventDefault();
         this.props.editUser(this.props.id, this.state, 'drivers')
         this.setState({
-            updated: 0
+            updated: 1
         })
+    }
+
+    componentWillMount(){
+        if(this.props.driver){
+            this.setState({
+                ...this.props.driver,loading: 0,updated: !this.state.updated
+            });
+        }
     }
 
     render() {
         const load = this.state.loading === 0 ? (
             <div className="container">
-                    <h2 className="center" style={{paddingTop: '100px'}}>Edit Driver</h2><br/><br/>
+                    <h2 className="center" style={{paddingTop: '50px'}}>Edit Driver</h2><br/><br/>
                     <div className="green-text center">
                         <h4>{this.state.updated ? "Updated Successfully" : null}</h4>
                     </div>
@@ -103,26 +100,10 @@ class EditDriver extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    
-    let id = ownProps.match.params.id;
-    return{
-        id: id,
-        driver: state.firestore.ordered.drivers,
-    }
-    
-}
-
 const mapDispatchToProps = (dispatch) => {
     return{
         editUser: (id, driver, collec) => dispatch(editUser(id, driver, collec))
     }
 }
 
-export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
-    firestoreConnect(props => [{
-        collection: 'drivers',
-        doc: props.id
-    }])
-)(EditDriver)
+export default connect(null, mapDispatchToProps)(EditDriver)

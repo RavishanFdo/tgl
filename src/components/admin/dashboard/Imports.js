@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 
 const Imports = ({importHires}) => {
+    if (!importHires.length) return <div><br/><br/><h4>No Imports Available</h4></div>
     return(
         <div>
             <br/><br/>

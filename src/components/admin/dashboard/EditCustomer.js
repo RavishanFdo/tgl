@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {firestoreConnect} from 'react-redux-firebase'
-import {compose} from 'redux'
 import {editUser} from '../../../store/actions/adminActions'
 
 class EditCustomer extends Component {
@@ -17,14 +15,6 @@ class EditCustomer extends Component {
         loading: 1,
         updated: 1
 
-    }
-    componentWillReceiveProps(nextProps) {
-        
-        if(this.props.customer){
-            this.setState({
-                ...nextProps.customer[0],loading: 0,updated: !this.state.updated
-            });
-        }
     }
 
     handleChange = (e) => {
@@ -42,14 +32,21 @@ class EditCustomer extends Component {
         e.preventDefault();
         this.props.editUser(this.props.id, this.state, 'customers')
         this.setState({
-            updated: 0
+            updated: 1
         })
+    }
+    componentWillMount(){
+        if(this.props.customer){
+            this.setState({
+                ...this.props.customer,loading: 0,updated: !this.state.updated
+            });
+        }
     }
 
     render() {
         const load = this.state.loading === 0 ? (
             <div className="container">
-                    <h2 className="center" style={{paddingTop: '100px'}}>Edit Customer</h2><br/><br/>
+                    <h2 className="center" style={{paddingTop: '50px'}}>Edit Customer</h2><br/><br/>
                     <div className="green-text center">
                         <h4>{this.state.updated ? "Updated Successfully" : null}</h4>
                     </div>
@@ -98,15 +95,6 @@ class EditCustomer extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    
-    let id = ownProps.match.params.id;
-    return{
-        id: id,
-        customer: state.firestore.ordered.customers,
-    }
-    
-}
 
 const mapDispatchToProps = (dispatch) => {
     return{
@@ -114,10 +102,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
-    firestoreConnect(props => [{
-        collection: 'customers',
-        doc: props.id
-    }])
-)(EditCustomer)
+export default connect(null, mapDispatchToProps)(EditCustomer)
