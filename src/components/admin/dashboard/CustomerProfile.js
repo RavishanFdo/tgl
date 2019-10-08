@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Badge} from 'react-bootstrap'
 import "react-tabs/style/react-tabs.css";
 
 class CustomerProfile extends Component {
@@ -32,6 +33,7 @@ class CustomerProfile extends Component {
                     <h6><b className="blue-text">Mobile: </b> {this.props.customer.mobile}</h6>
                     <h6><b className="blue-text">Email: </b> {this.props.customer.email}</h6>
                     <h6><b className="blue-text">NIC: </b> {this.props.customer.nic}</h6>
+                    {this.props.customer.disabled === false ? <Badge pill variant="success" className="left">Active</Badge> : <Badge pill variant="danger" className="left">Disabled</Badge> }
                 </div>
             </div>
         ): <div><br/><br/><br/>Loading</div>

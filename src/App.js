@@ -5,6 +5,7 @@ import Homepage from './components/dashboard/Homepage'
 import About from './components/dashboard/About'
 import Services from './components/dashboard/Services'
 import Contact from './components/dashboard/Contact'
+import ErrorPage from './components/dashboard/ErrorPage'
 import Footer from './components/layout/Footer'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
@@ -50,6 +51,7 @@ function App(props) {
               <Route path='/about' component={About}  />
               <Route path='/services' component={Services} />
               <Route path='/contact' component={Contact} />
+              <Route path='/error' component={ErrorPage} />
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />
               

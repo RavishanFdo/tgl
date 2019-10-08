@@ -4,6 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import EditDriver from './EditDriver'
 import Exports from './Exports'
 import Imports from './Imports'
+import DisableAccount from './DisableAccount'
 import DriverProfile from './DriverProfile'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
@@ -46,6 +47,7 @@ class ManageDriver extends Component {
                     <TabList className="left">
                         <Tab>Hires</Tab>
                         <Tab>Edit Profile</Tab>
+                        <Tab>Settings</Tab>
                     </TabList>
                     <br/><br/>
                     <TabPanel>
@@ -64,6 +66,9 @@ class ManageDriver extends Component {
                     </TabPanel>
                     <TabPanel>
                         <EditDriver driver={this.props.driver[0]} id={this.props.id}></EditDriver>
+                    </TabPanel>
+                    <TabPanel>
+                        <DisableAccount user={this.props.driver[0]} id={this.props.id} type='drivers'></DisableAccount>
                     </TabPanel>
                 </Tabs>
             </div>

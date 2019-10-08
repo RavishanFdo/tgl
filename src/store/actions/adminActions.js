@@ -6,6 +6,7 @@ export const addVehicle = (vehicle) => {
         const firestore = getFirestore();
         firestore.collection('vehicles').add({
             ...vehicle,
+            disabled: false,
             createAt: new Date()
         }).then(() => {
             dispatch({type: 'ADD_VEHICLE', vehicle});
@@ -41,7 +42,7 @@ export const addCustomer = (newCustomer) => {
                     mobile: newCustomer.mobile,
                     dob: newCustomer.dob,
                     nic: newCustomer.nic,
-                    visibility: '1',
+                    disabled: false,
                     createdAt: new Date()
                 })
             })
@@ -82,7 +83,7 @@ export const addDriver = (newDriver) => {
                     nic: newDriver.nic,
                     dob: newDriver.dob,
                     onHire: '0',
-                    visibility: '1',
+                    disabled: false,
                     createdAt: new Date()
                 })
             })
@@ -105,6 +106,38 @@ export const editUser = (customerId, data, collec) => {
             dispatch({type: 'DOCUMENT_UPDATED'});
         }).catch((err) => {
             dispatch({type: 'ERROR_UPDATING_DOCUMENT', err});
+        })
+    }
+}
+
+export const disableOrEnableUser = (userId, collec, token) => {
+
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection(collec).doc(userId).update({
+            disabled: token
+        }).then(() => {
+            return firestore.collection('users').doc(userId).update({
+                disabled: token
+            })
+        }).then(() => {
+            dispatch({type: 'AVAILABILITY_UPDATED'})
+        }).catch(err => {
+            dispatch({type: 'FAILED_TO_UPDATE_AVAILABILITY', err})
+        })
+    }
+}
+
+export const disableOrEnableVehicle = (id, token) => {
+
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('vehicles').doc(id).update({
+            disabled: token
+        }).then(() => {
+            dispatch({type: 'AVAILABILITY_UPDATED'})
+        }).catch(err => {
+            dispatch({type: 'FAILED_TO_UPDATE_AVAILABILITY', err})
         })
     }
 }

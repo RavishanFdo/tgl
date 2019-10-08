@@ -4,6 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import EditCustomer from './EditCustomer'
 import Exports from './Exports'
 import Imports from './Imports'
+import DisableAccount from './DisableAccount'
 import CustomerProfile from './CustomerProfile'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
@@ -46,6 +47,7 @@ class ManageCustomer extends Component {
                     <TabList className="left">
                         <Tab>Hires</Tab>
                         <Tab>Edit Profile</Tab>
+                        <Tab>Settings</Tab>
                     </TabList>
                     <br/><br/>
                     <TabPanel>
@@ -64,6 +66,9 @@ class ManageCustomer extends Component {
                     </TabPanel>
                     <TabPanel>
                         <EditCustomer customer={this.props.customer[0]} id={this.props.id}></EditCustomer>
+                    </TabPanel>
+                    <TabPanel>
+                        <DisableAccount user={this.props.customer[0]} id={this.props.id} type='customers'></DisableAccount>
                     </TabPanel>
                 </Tabs>
             </div>

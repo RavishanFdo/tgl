@@ -4,6 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import EditVehicle from './EditVehicle'
 import Exports from './Exports'
 import Imports from './Imports'
+import DisableVehicle from './DisableVehicle'
 import VehicleProfile from './VehicleProfile'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
@@ -46,6 +47,7 @@ class ManageVehicle extends Component {
                     <TabList className="left">
                         <Tab>Hires</Tab>
                         <Tab>Edit Vehicle</Tab>
+                        <Tab>Settings</Tab>
                     </TabList>
                     <br/><br/>
                     <TabPanel>
@@ -64,6 +66,9 @@ class ManageVehicle extends Component {
                     </TabPanel>
                     <TabPanel>
                         <EditVehicle vehicle={this.props.vehicle[0]} id={this.props.id}></EditVehicle>
+                    </TabPanel>
+                    <TabPanel>
+                        <DisableVehicle vehicle={this.props.vehicle[0]} id={this.props.id}></DisableVehicle>
                     </TabPanel>
                 </Tabs>
             </div>

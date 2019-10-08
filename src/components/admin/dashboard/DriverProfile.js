@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Badge} from 'react-bootstrap'
 import "react-tabs/style/react-tabs.css";
 
 class DriverProfile extends Component {
@@ -33,6 +34,7 @@ class DriverProfile extends Component {
                     <h6><b className="blue-text">Email: </b> {this.props.driver.email}</h6>
                     <h6><b className="blue-text">NIC: </b> {this.props.driver.nic}</h6>
                     <h6><b className="blue-text">License: </b> {this.props.driver.licenseNo}</h6>
+                    {this.props.driver.disabled === false ? <Badge pill variant="success" className="left">Active</Badge> : <Badge pill variant="danger" className="left">Disabled</Badge> }
                 </div>
             </div>
         ): <div><br/><br/><br/>Loading</div>

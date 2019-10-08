@@ -25,7 +25,8 @@ class SignIn extends Component {
     render() {
         const {authError,user} = this.props
         if (user.userType === 'admin') return <Redirect to='/admin' />
-        if (user.userType === 'customer') return <Redirect to='/' />
+        if (user.userType === 'customer' && user.disabled === false) return <Redirect to='/' />
+        if (user.disabled === true) return <Redirect to='/error' />
         return (
             <div className="loginBody">
                 <div className="container-fluid">
