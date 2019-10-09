@@ -22,8 +22,9 @@ class Drivers extends Component {
       }
 
     render () {
-        const {auth, drivers} = this.props
+        const {auth,type, drivers} = this.props
         if (!auth.uid) return <Redirect to='/signin' />
+        // if (type.userType !== 'admin') return <Redirect to='/signin' />
         return(
         // <div className="main-panel">
             <div id="content" className="container-fluid" role="main">
@@ -73,9 +74,10 @@ class Drivers extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
         auth: state.firebase.auth,
+        type: state.firebase.profile,
         drivers: state.firestore.ordered.drivers
     }
 }

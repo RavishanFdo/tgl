@@ -18,7 +18,7 @@ const AdminNavbar = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <Nav className="justify-content-end mr-auto" style={{ width: "85%" }}>
           <Nav.Link><NavLink to='/admin/addhire' style={{textDecoration: 'none'}}>+Add Hire</NavLink></Nav.Link>
-          <Nav.Link><FaUserCircle size={28}/></Nav.Link>
+          {/* <Nav.Link><NavLink to={'/admin/' + props.auth.uid}><FaUserCircle size={28}/></NavLink></Nav.Link> */}
 
           <NavDropdown title={<FaBell size={28}/>} id="basic-nav-dropdown">
             <NavDropdown.Item >Action</NavDropdown.Item>
@@ -36,10 +36,16 @@ const AdminNavbar = (props) => {
   )
 }
 
+const mapStateToProps = (state) => {
+  return{
+    auth: state.firebase.auth
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
       signOut: () => dispatch(signOut())
   }
 }
 
-export default connect(null, mapDispatchToProps)(AdminNavbar);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminNavbar);

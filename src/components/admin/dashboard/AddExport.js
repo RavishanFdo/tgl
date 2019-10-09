@@ -68,7 +68,7 @@ class AddExport extends Component {
         if(this.props.customers){
             const availableCustomers = this.props.customers.sort((a,b) => { return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()}).reverse()
             this.setState({
-                availableCustomers: availableCustomers
+                availableCustomers: availableCustomers.filter(item => item.disabled === false)
             })
         }
     }
@@ -81,7 +81,7 @@ class AddExport extends Component {
             if(this.props.hires && this.props.drivers){
                 const driversOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.driverId)
 
-                const allDrivers = this.props.drivers
+                const allDrivers = this.props.drivers.filter(item => item.disabled === false)
                 const freeDrivers = allDrivers.filter(function(item) {
                     return !driversOnHire.includes(item.id); 
                   })
@@ -113,7 +113,7 @@ class AddExport extends Component {
             if(this.props.hires && this.props.vehicles){
                 const vehiclesOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.vehicleId)
                
-                const allVehicles = this.props.vehicles
+                const allVehicles = this.props.vehicles.filter(item => item.disabled === false)
                 const freeVehicles = allVehicles.filter(function(item) {
                     return !vehiclesOnHire.includes(item.id); 
                   })

@@ -30,10 +30,11 @@ import ManageHire from './components/admin/dashboard/ManageHire'
 import ManageCustomer from './components/admin/dashboard/ManageCustomer'
 import ManageDriver from './components/admin/dashboard/ManageDriver'
 import ManageVehicle from './components/admin/dashboard/ManageVehicle'
+import DisabledUsers from './components/admin/dashboard/DisabledUsers'
 
 
 function App(props) {
-
+  
   const {type} = props;
 
   const link = type.userType === "admin" ? null : <Footer/>
@@ -73,6 +74,8 @@ function App(props) {
               <Route path='/admin/drivers/:id' component={ManageDriver} />
               <Route path='/admin/vehicles/:id' component={ManageVehicle} />
               <Route path='/admin/hires/:id' component={ManageHire} />
+
+              <Route path='/admin/disabled' component={DisabledUsers}/>
             </Switch>
           </div>
         </div>
