@@ -1,8 +1,8 @@
 const initState = {
     hires: [
-        {id: '1', hireType: 'import', containerType: '20ft', cargoType: 'tea', destination: 'colombo', driver: 'paul'},
-        {id: '2', hireType: 'export', containerType: '40ft', cargoType: 'metal', loadingPort: 'colombo', driver: 'paul'},
-        {id: '3', hireType: 'import', containerType: '20ft', cargoType: 'copper', destination: 'colombo', driver: 'paul'},
+        // {id: '1', hireType: 'import', containerType: '20ft', cargoType: 'tea', destination: 'colombo', driver: 'paul'},
+        // {id: '2', hireType: 'export', containerType: '40ft', cargoType: 'metal', loadingPort: 'colombo', driver: 'paul'},
+        // {id: '3', hireType: 'import', containerType: '20ft', cargoType: 'copper', destination: 'colombo', driver: 'paul'},
     ]
 }
 

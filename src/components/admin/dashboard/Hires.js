@@ -32,10 +32,10 @@ class Hires extends Component {
                         <Tab>EXPORTS</Tab>
                     </TabList>
                     <TabPanel>
-                        <Imports importHires={importHires}></Imports>
+                        <Imports importHires={importHires} history={this.props.history}></Imports>
                     </TabPanel>
                     <TabPanel>
-                        <Exports exportHires={exportHires}></Exports>
+                        <Exports exportHires={exportHires} history={this.props.history}></Exports>
                     </TabPanel>
                 </Tabs>
             </div>

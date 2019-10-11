@@ -48,7 +48,7 @@ class ManageHireRequest extends Component {
             if(ListH && this.props.drivers){
                 const driversOnHire = ListH.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.driverId)
 
-                const allDrivers = this.props.drivers
+                const allDrivers = this.props.drivers.filter(item => item.disabled === false)
                 const freeDrivers = allDrivers.filter(function(item) {
                     return !driversOnHire.includes(item.id); 
                   })
@@ -77,7 +77,7 @@ class ManageHireRequest extends Component {
             if(ListH && this.props.vehicles){
                 const vehiclesOnHire = ListH.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.vehicleId)
                
-                const allVehicles = this.props.vehicles
+                const allVehicles = this.props.vehicles.filter(item => item.disabled === false)
                 const freeVehicles = allVehicles.filter(function(item) {
                     return !vehiclesOnHire.includes(item.id); 
                   })

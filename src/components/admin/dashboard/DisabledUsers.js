@@ -49,13 +49,13 @@ class ManageCustomer extends Component {
                     </TabList>
                     <br/><br/>
                     <TabPanel>
-                        <DisabledCustomers customers={customers.filter(item => item.disabled === true)}></DisabledCustomers>
+                        <DisabledCustomers customers={customers.filter(item => item.disabled === true)} history={this.props.history}></DisabledCustomers>
                     </TabPanel>
                     <TabPanel>
-                        <DisabledDrivers drivers={drivers.filter(item => item.disabled === true)}></DisabledDrivers>
+                        <DisabledDrivers drivers={drivers.filter(item => item.disabled === true)} history={this.props.history}></DisabledDrivers>
                     </TabPanel>
                     <TabPanel>
-                        <DisabledVehicles vehicles={vehicles.filter(item => item.disabled === true)}></DisabledVehicles>
+                        <DisabledVehicles vehicles={vehicles.filter(item => item.disabled === true)} history={this.props.history}></DisabledVehicles>
                     </TabPanel>
                 </Tabs>
             </div>

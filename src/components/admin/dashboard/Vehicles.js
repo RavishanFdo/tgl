@@ -4,7 +4,9 @@ import AddVehicle from './AddVehicle'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
-import {Redirect, Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+import 'react-tabulator/lib/styles.css';
+import { ReactTabulator } from 'react-tabulator'
 
 class Vehicles extends Component {
 
@@ -14,7 +16,7 @@ class Vehicles extends Component {
         this.state = { collapse: false };
     }
 
-    static defaultProps = { // <-- DEFAULT PROPS
+    static defaultProps = {
         vehicles: []       
     }
     
@@ -25,6 +27,27 @@ class Vehicles extends Component {
     render () {
         const {auth, vehicles} = this.props
         if (!auth.uid) return <Redirect to='/signin' />
+
+        const columns = [
+            { title: "Vehicle No", field: "vehicleNo", width: 150, headerFilter:"input" },
+            { title: "Make", field: "make", align: "left", headerFilter:"input"},
+            { title: "Model", field: "model", headerFilter:"input" },
+            { title: "Trailer No", field: "trailerNo", headerFilter:"input"},
+            { title: "Purchased Date", field: "purchasedDate", align: "center"},
+            { title: "Engine No", field: "engineNo", align: "center"},
+        ];
+
+        var data = []
+
+        {vehicles && vehicles.map(vehicle =>{
+            data.push({id: vehicle.id, vehicleNo: vehicle.vehicleNo, make: vehicle.make, model: vehicle.model, trailerNo: vehicle.trailerNo, purchasedDate: vehicle.purchasedDate, engineNo: vehicle.engineNo})
+        }       
+        )} 
+
+        var rowClick = (e, row) => {
+            let path = '/admin/vehicles/' + row.getData().id;
+            this.props.history.push(path)
+        };
         return(
                 <div id="content" className="container-fluid" role="main">
                     <br/><br/><br/><br/>
@@ -36,7 +59,17 @@ class Vehicles extends Component {
                         </CardBody>
                     </Card>
                     </Collapse>
-                    <table className="table">
+
+                    <ReactTabulator
+                        data={data}
+                        ref={ref => (this.ref = ref)}
+                        columns={columns}
+                        tooltips={true}
+                        layout={"fitData"}
+                        rowClick={rowClick}
+                        options={{ pagination: 'local',paginationSize: 10}}
+                    />
+                    {/* <table className="table">
                         <thead className="thead-dark">
                         <tr>
                             <th>Vehicle No</th>
@@ -54,7 +87,7 @@ class Vehicles extends Component {
                                 <tr key={vehicle.id}>
                                     <td>{vehicle.vehicleNo}</td>
                                     <td>{vehicle.make}</td>
-                                    <td>{vehicle.model}</td>
+                                    <td>{vehicle.model}</td> 
                                     <td>{vehicle.trailerNo}</td>
                                     <td>{vehicle.purchasedDate}</td>
                                     <td>{vehicle.engineNo}</td>
@@ -65,7 +98,7 @@ class Vehicles extends Component {
                             )
                         })}
                         </tbody>
-                    </table>
+                    </table> */}
                 </div>
     )
         }

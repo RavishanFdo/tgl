@@ -1,14 +1,53 @@
 import React from 'react'
-import {Badge} from 'react-bootstrap'
+// import {Badge} from 'react-bootstrap'
 import moment from 'moment'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
+import { ReactTabulator } from 'react-tabulator'
 
-const ExportRequests = ({exportHireRequest}) => {
-    if (!exportHireRequest) return <div><br/><br/><h4>No Export Requests</h4></div>
+const ExportRequests = ({exportHireRequests, history}) => {
+    if (!exportHireRequests) return <div><br/><br/><h4>No Export Requests</h4></div>
+
+    const columns = [
+        { title: "Type", field: "containerType", width: 75, align: "center"},
+        { title: "Pickup Date", field: "pickupDatetime", headerFilter:"input"},
+        { title: "Pickup Location", field: "pickupLocation", headerFilter:"input"},
+        { title: "Cargo Type", field: "cargoType", headerFilter:"input", width: 150},
+        { title: "Loading Date", field: "loadingDatetime", headerFilter:"input"},
+        { title: "Customer", field: "customerName", headerFilter:"input"},
+    ];
+
+    var data = []
+
+    {exportHireRequests && exportHireRequests.map(exp =>{
+        data.push({
+            id: exp.id, 
+            containerType: exp.containerType, 
+            pickupDatetime: moment(exp.pickupDatetime).format('MMM Do YYYY, h:mm:ss a'), 
+            pickupLocation: exp.pickupLocation,
+            cargoType: exp.cargoType, 
+            loadingDatetime: moment(exp.loadingDatetime).format('MMM Do YYYY, h:mm:ss a'), 
+            customerName: exp.customerName,
+        })
+    }       
+    )} 
+
+    var rowClick = (e, row) => {
+        let path = '/admin/hires/' + row.getData().id;
+        history.push(path)
+    };
+
     return(
         <div>
             <br/><br/>
-            <table className="table">
+            <ReactTabulator
+                data={data}
+                columns={columns}
+                tooltips={true}
+                layout={"fitData"}
+                rowClick={rowClick}
+                options={{ pagination: 'local',paginationSize: 10}}
+            />
+            {/* <table className="table">
                 <thead className="thead-dark">
                 <tr>
                     <th>Type</th>
@@ -21,7 +60,7 @@ const ExportRequests = ({exportHireRequest}) => {
                 </tr>
                 </thead>
                 <tbody>
-                    {exportHireRequest && exportHireRequest.map(exp =>{
+                    {exportHireRequests && exportHireRequests.map(exp =>{
                         return (
                             <tr key={exp.id}>
                             <td className="center-align">{exp.containerType}</td>
@@ -37,7 +76,7 @@ const ExportRequests = ({exportHireRequest}) => {
                         )
                     })}
                 </tbody>
-            </table>
+            </table> */}
         </div>
     )
 }

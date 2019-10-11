@@ -1,14 +1,52 @@
 import React from 'react'
-import {Badge} from 'react-bootstrap'
+// import {Badge} from 'react-bootstrap'
 import moment from 'moment'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
+import { ReactTabulator } from 'react-tabulator'
 
-const ImportRequests = ({importHireRequests}) => {
-    if (!importHireRequests) return <div><br/><br/><h4>No Import Requests</h4></div>
+const ImportRequests = ({importHireRequests, history}) => {
+    if (!importHireRequests.length) return <div><br/><br/><h4>No Import Requests</h4></div>
+
+    const columns = [
+        { title: "Type", field: "containerType", width: 75, align: "center"},
+        { title: "Pickup Date", field: "pickupDatetime", headerFilter:"input"},
+        { title: "Cargo Type", field: "cargoType", headerFilter:"input", width: 150},
+        { title: "Vessel Arrival Date", field: "vesselArrivalDatetime", headerFilter:"input"},
+        { title: "Destination", field: "destination", headerFilter:"input", width: 150},
+        { title: "Customer", field: "customerName", headerFilter:"input"},
+    ];
+
+    var data = []
+
+    {importHireRequests && importHireRequests.map(imp =>{
+        data.push({
+            id: imp.id, 
+            containerType: imp.containerType, 
+            pickupDatetime: moment(imp.pickupDatetime).format('MMM Do YYYY, h:mm:ss a'), 
+            cargoType: imp.cargoType, 
+            vesselArrivalDatetime: moment(imp.vesselArrivalDatetime).format('MMM Do YYYY, h:mm:ss a'), 
+            destination: imp.destination, 
+            customerName: imp.customerName,
+        })
+    }       
+    )} 
+
+    var rowClick = (e, row) => {
+        let path = '/admin/hires/' + row.getData().id;
+        history.push(path)
+    };
     return(
         <div>
             <br/><br/>
-            <table className="table">
+            <ReactTabulator
+                data={data}
+                columns={columns}
+                tooltips={true}
+                layout={"fitData"}
+                rowClick={rowClick}
+                options={{ pagination: 'local',paginationSize: 10}}
+            />
+            {/* <table className="table">
                 <thead className="thead-dark">
                 <tr>
                     <th>Type</th>
@@ -39,7 +77,7 @@ const ImportRequests = ({importHireRequests}) => {
                         )
                     })}
                 </tbody>
-            </table>
+            </table> */}
         </div>
     )
 }

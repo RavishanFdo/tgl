@@ -31,10 +31,10 @@ class HireRequests extends Component {
                         <Tab>EXPORTS</Tab>
                     </TabList>
                     <TabPanel>
-                        <ImportRequests importHireRequests={importHireRequests}></ImportRequests>
+                        <ImportRequests importHireRequests={importHireRequests} history={this.props.history}></ImportRequests>
                     </TabPanel>
                     <TabPanel>
-                        <ExportRequests exportHireRequests={exportHireRequests}></ExportRequests>
+                        <ExportRequests exportHireRequests={exportHireRequests} history={this.props.history}></ExportRequests>
                     </TabPanel>
                 </Tabs>
             </div>

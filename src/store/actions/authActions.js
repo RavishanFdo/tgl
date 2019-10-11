@@ -47,7 +47,7 @@ export const signUp = (newUser) => {
                     dob: newUser.dob,
                     nic: newUser.nic,
                     disabled: false,
-                    createAt: new Date()
+                    createdAt: new Date()
                 })
             })
         }).then(() => {

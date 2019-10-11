@@ -31,10 +31,10 @@ class OngoingHires extends Component {
                         <Tab>EXPORTS</Tab>
                     </TabList>
                     <TabPanel>
-                        <OngoingImports ongoingImportHires={ongoingImportHires}></OngoingImports>
+                        <OngoingImports ongoingImportHires={ongoingImportHires} history={this.props.history}></OngoingImports>
                     </TabPanel>
                     <TabPanel>
-                        <OngoingExports ongoingExportHires={ongoingExportHires}></OngoingExports>
+                        <OngoingExports ongoingExportHires={ongoingExportHires} history={this.props.history}></OngoingExports>
                     </TabPanel>
                 </Tabs>
             </div>

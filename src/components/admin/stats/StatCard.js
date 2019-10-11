@@ -14,7 +14,7 @@ export class StatCard extends Component {
     loading: 0
 }
 
-componentWillReceiveProps(nextProps) {
+UNSAFE_componentWillReceiveProps(nextProps) {
     
     if(this.props.hires){
         this.setState({
@@ -52,7 +52,7 @@ componentWillReceiveProps(nextProps) {
             <NavLink to='/admin/hires'>
               <div className="card-counter info">
                   <i className="fa fa-users"></i>
-                  <span className="count-numbers">{completedImportHires}</span>
+                  <span className="count-numbers">{completedExportHires}</span>
                   <span className="count-name">Exports</span>
               </div>
             </NavLink>
@@ -64,7 +64,6 @@ componentWillReceiveProps(nextProps) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
       auth: state.firebase.auth,
       hires: state.firestore.ordered.hires,

@@ -21,7 +21,7 @@ class ManageCustomer extends Component {
         loading: 1
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         
         if(this.props.customer){
             this.setState({

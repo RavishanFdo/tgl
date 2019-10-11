@@ -2,13 +2,62 @@ import React from 'react'
 import {Badge} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
+import { ReactTabulator } from 'react-tabulator'
 
-const Exports = ({exportHires}) => {
+const Exports = ({exportHires, history}) => {
     if (!exportHires.length) return <div><br/><br/><h4>No Exports Available</h4></div>
+
+    const columns = [
+        { title: "Type", field: "containerType", width: 75, align: "center"},
+        { title: "Pickup Date", field: "pickupDatetime", headerFilter:"input"},
+        { title: "Pickup Location", field: "pickupLocation", headerFilter:"input"},
+        { title: "Cargo Type", field: "cargoType", headerFilter:"input", width: 150},
+        { title: "Loading Date", field: "loadingDatetime", headerFilter:"input"},
+        { title: "Driver", field: "driverName", headerFilter:"input"},
+        { title: "Customer", field: "customerName", headerFilter:"input"},
+        { title: "Vehicle", field: "vehicleNo", headerFilter:"input", width: 150},
+        {title:"Status",align: "center", field:"hireStatus", formatter:"traffic", formatterParams:{
+            min:1,
+            max:2,
+            color:["green", "red"],
+        }}
+    ];
+
+    var data = []
+
+    {exportHires && exportHires.map(exp =>{
+        data.push({
+            id: exp.id, 
+            containerType: exp.containerType, 
+            pickupDatetime: moment(exp.pickupDatetime).format('MMM Do YYYY, h:mm:ss a'), 
+            pickupLocation: exp.pickupLocation,
+            cargoType: exp.cargoType, 
+            loadingDatetime: moment(exp.loadingDatetime).format('MMM Do YYYY, h:mm:ss a'), 
+            driverName: exp.driverName,
+            customerName: exp.customerName,
+            vehicleNo: exp.vehicleNo,
+            hireStatus: exp.hireStatus === "completed" ? 1 : 2
+
+        })
+    }       
+    )} 
+
+    var rowClick = (e, row) => {
+        let path = '/admin/hires/' + row.getData().id;
+        history.push(path)
+    };
     return(
             <div>
                 <br/><br/>
-                <table className="table">
+                <ReactTabulator
+                    data={data}
+                    columns={columns}
+                    tooltips={true}
+                    layout={"fitData"}
+                    rowClick={rowClick}
+                    options={{ pagination: 'local',paginationSize: 10}}
+                />
+                {/* <table className="table">
                     <thead className="thead-dark">
                     <tr>
                         <th>Type</th>
@@ -46,7 +95,7 @@ const Exports = ({exportHires}) => {
                             )
                         })}
                     </tbody>
-                </table>
+                </table> */}
             </div>
     )
 }

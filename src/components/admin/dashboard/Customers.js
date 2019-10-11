@@ -6,6 +6,7 @@ import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {Redirect, Link} from 'react-router-dom'
 import moment from 'moment'
+import { ReactTabulator } from 'react-tabulator'
 
 
 class Customers extends Component {
@@ -22,6 +23,35 @@ class Customers extends Component {
     render () {
         const {auth, customers} = this.props
         if (!auth.uid) return <Redirect to='/signin' />
+
+        const columns = [
+            { title: "Name", field: "name", headerFilter:"input" },
+            { title: "Email", field: "email", headerFilter:"input"},
+            { title: "Mobile", field: "mobile", headerFilter:"input"},
+            { title: "NIC", field: "nic", headerFilter:"input" },          
+            { title: "User Since", field: "createdAt", align: "center"},
+            
+        ];
+
+        var data = []
+
+        {customers && customers.map(customer =>{
+            data.push({
+                id: customer.id, 
+                name: customer.firstName + ' ' + customer.lastName, 
+                nic: customer.nic, 
+                mobile: customer.mobile, 
+                createdAt: moment(customer.createdAt.toDate()).format("MMM Do YYYY"), 
+                email: customer.email
+            })
+        }       
+        )} 
+
+        var rowClick = (e, row) => {
+            let path = '/admin/customers/' + row.getData().id;
+            this.props.history.push(path)
+        };
+
         return(
         // <div className="main-panel">
             <div id="content" className="container-fluid" role="main">
@@ -34,7 +64,17 @@ class Customers extends Component {
                     </CardBody>
                 </Card>
                 </Collapse>
-                <table class="table">
+
+                <ReactTabulator
+                    data={data}
+                    ref={ref => (this.ref = ref)}
+                    columns={columns}
+                    tooltips={true}
+                    layout={"fitData"}
+                    rowClick={rowClick}
+                    options={{ pagination: 'local',paginationSize: 10}}
+                />
+                {/* <table class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th>Name</th>
@@ -61,7 +101,7 @@ class Customers extends Component {
                         )
                     })}
                     </tbody>
-                </table>
+                </table> */}
             </div>
         // </div>
     )
