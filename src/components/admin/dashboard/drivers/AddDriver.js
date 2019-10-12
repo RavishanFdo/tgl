@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-// import {NavLink} from 'react-router-dom'
-// import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addCustomer} from '../../../store/actions/adminActions'
+import {addDriver} from '../../../../store/actions/adminActions'
 
-class AddCustomer extends Component {
+class AddDriver extends Component {
     state = {
         email: '',
         password: '',
@@ -12,7 +10,10 @@ class AddCustomer extends Component {
         lastName: '',
         mobile: '',
         dob: '',
-        nic: ''
+        licenseNo: '',
+        nic: '',
+        onHire: '0',
+        visibility: '1'
 
     }
 
@@ -30,7 +31,7 @@ class AddCustomer extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         // console.log(this.state);
-        this.props.addCustomer(this.state)
+        this.props.addDriver(this.state)
     }
 
     render() {
@@ -38,7 +39,7 @@ class AddCustomer extends Component {
         return (
                 <div className="container">
                     <br/>
-                    <h2 className="center">Add Customer</h2><br/><br/>
+                    <h2 className="center">Add Driver</h2><br/><br/>
                     <div className="red-text center">
                         {authError ? <h6>{authError}</h6> : null}
                     </div>
@@ -56,23 +57,26 @@ class AddCustomer extends Component {
                                 <input placeholder="Mobile" type="text" id="mobile" onChange={this.handleChange} required />
                             </div>
                             <div className="input-field col-6">
-                                <input placeholder="Date of Birth" onFocus={this.handleDate} type="text" id="dob" onChange={this.handleChange} required />
+                                <input placeholder="Date of Birth" type="text" onFocus={this.handleDate} id="dob" onChange={this.handleChange} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col-6">
-                                <input placeholder="NIC No" type="text" id="nic" onChange={this.handleChange} required />
+                                <input placeholder="License No" type="text" id="licenseNo" onChange={this.handleChange} required/>
                             </div>
                             <div className="input-field col-6">
-                                <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required />
+                                <input placeholder="NIC" type="text" id="nic" onChange={this.handleChange} required/>
                             </div>
+                        </div>
+                        <div className="input-field  col-6">
+                            <input placeholder="Email" type="email" id="email" onChange={this.handleChange} required/>
                         </div>
                         <div className="row">
                             <div className="input-field col-6">
                                 <input placeholder="Password" type="password" id="password" onChange={this.handleChange} required />
                             </div>
                         </div>
-                        <input type="hidden" id="userType" value="customer"/>
+                        <input type="hidden" id="userType" value="driver"/>
                         <div className="input-field center">
                             <button className="btn blue lighten-1 z-depth-0">Register</button>
                             <button className="btn red lighten-1 z-depth-0">Cancel</button>
@@ -91,8 +95,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        addCustomer: (newCustomer) => dispatch(addCustomer(newCustomer))
+        addDriver: (newDriver) => dispatch(addDriver(newDriver))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCustomer);
+export default connect(mapStateToProps,mapDispatchToProps)(AddDriver);

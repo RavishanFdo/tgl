@@ -4,11 +4,16 @@ import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import moment from 'moment'
 import {Redirect} from 'react-router-dom'
-import {acceptHireRequest} from '../../../store/actions/adminHireActions'
-import {declineHireRequest} from '../../../store/actions/adminHireActions'
+import {acceptHireRequest} from '../../../../store/actions/adminHireActions'
+import {declineHireRequest} from '../../../../store/actions/adminHireActions'
 
-class ManagePendingHires extends Component {
+class ManageHireRequest extends Component {
     state = {
+        driverId: '',
+        driverName: '',
+        vehicleId: '',
+        vehicleNo: '',
+        remarks: '',
         loading: 1,
         freeDrivers: '',
         redir: 0
@@ -23,7 +28,6 @@ class ManagePendingHires extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.acceptHireRequest(this.props.hire[0].id, this.state) 
-        // console.log(this.state)
         this.setState({
             redir : 1
         })     
@@ -44,7 +48,7 @@ class ManagePendingHires extends Component {
             if(ListH && this.props.drivers){
                 const driversOnHire = ListH.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.driverId)
 
-                const allDrivers = this.props.drivers
+                const allDrivers = this.props.drivers.filter(item => item.disabled === false)
                 const freeDrivers = allDrivers.filter(function(item) {
                     return !driversOnHire.includes(item.id); 
                   })
@@ -73,7 +77,7 @@ class ManagePendingHires extends Component {
             if(ListH && this.props.vehicles){
                 const vehiclesOnHire = ListH.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.vehicleId)
                
-                const allVehicles = this.props.vehicles
+                const allVehicles = this.props.vehicles.filter(item => item.disabled === false)
                 const freeVehicles = allVehicles.filter(function(item) {
                     return !vehiclesOnHire.includes(item.id); 
                   })
@@ -100,11 +104,6 @@ class ManagePendingHires extends Component {
             this.setState({
                 ...nextProps,
                 loading: 0,
-                driverId: this.props.hire[0].driverId,
-                driverName: this.props.hire[0].driverName,
-                vehicleId: this.props.hire[0].vehicleId,
-                vehicleNo: this.props.hire[0].vehicleNo,
-                remarks: this.props.hire[0].remarks
             });
             this.availableDrivers()
         }
@@ -195,32 +194,30 @@ class ManagePendingHires extends Component {
                 </div>
                 <div className="container">
                     <form onSubmit={this.handleSubmit} >
-                        <br/><hr/><h5 className="center">Change Driver</h5><br/>
+                        <br/><hr/><h5 className="center">Assign Driver</h5><br/>
                         <div className="row" style={{padding: '20px'}} >
                             <div className="input-field col-6">
                                 <select className="form-control" id="driverId" onChange={this.handleDriver} onBlur={this.handleDriver}>
-                                    <option selected='selected' selected value={this.props.hire[0].driverId + "_" + this.props.hire[0].driverName.split(" ")[0] + " " + this.props.hire[0].driverName.split(" ")[1]}>{this.props.hire[0].driverName}</option>
                                     {this.state.freeDrivers ? this.state.freeDrivers.map((x, i) => {return (<option value={x.id + "_" + x.firstName + " " + x.lastName} key={i}>{x.firstName + " " + x.lastName + " - " + x.mobile}</option>)}) : null}
                                 </select>
                             </div>
                         </div>
-                        <br/><hr/><h5 className="center">Change Vehicle</h5><br/>
-                        <div className="row" style={{padding: '20px'}}> 
+                        <br/><hr/><h5 className="center">Assign Vehicle</h5><br/>
+                        <div className="row" style={{padding: '20px'}}>
                             <div className="input-field col-6">
                                 <select className="form-control" id="vehicleId" onFocus={this.availableVehicles} onChange={this.handleVehicle} onBlur={this.handleVehicle}>
-                                    <option selected='selected' value={this.props.hire[0].vehicleId + '_' + this.props.hire[0].vehicleNo} >{this.props.hire[0].vehicleNo}</option>
                                     {this.state.freeVehicles ? this.state.freeVehicles.map((x, i) => {return (<option value={x.id + "_" + x.vehicleNo} key={i}>{x.vehicleNo + " - " + x.trailerNo}</option>)}) : null}
                                 </select>
                             </div>
                         </div>
                         <br/><hr/><h5 className="center">Remarks</h5><br/>
                         <div className="input-field row col-12" style={{padding: '20px'}}>
-                            <textarea placeholder="Remarks" value={this.props.hire[0].remarks.toString()} style={{ minHeight: 100 }} type="text" id="remarks" onFocus={this.handleChange} onChange={this.handleChange}/>
+                            <textarea placeholder="Remarks" value={this.state.hire[0].remarks} style={{ minHeight: 100 }} type="text" id="remarks" onChange={this.handleChange}/>
                         </div>
                         <br/><br/>
                         <div className="input-field center">
-                            <button className="btn blue lighten-1 z-depth-0" style={{padding: '5px'}} type="submit">Update</button>
-                            <button className="btn red lighten-1 z-depth-0" style={{padding: '5px'}} type="button" onClick={this.declineHire}>Decline Hire</button>
+                            <button className="btn blue lighten-1 z-depth-0" type="submit">Add</button>
+                            <button className="btn red lighten-1 z-depth-0" onClick={this.declineHireRequest}>Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -254,4 +251,4 @@ export default compose(
         {collection: 'drivers'},
         {collection: 'vehicles'},
     ])
-)(ManagePendingHires);
+)(ManageHireRequest);

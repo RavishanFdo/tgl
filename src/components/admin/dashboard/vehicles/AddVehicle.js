@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 // import {NavLink, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addVehicle} from '../../../store/actions/adminActions'
+import {addVehicle} from '../../../../store/actions/adminActions'
 
 class AddVehicle extends Component {
     state = {

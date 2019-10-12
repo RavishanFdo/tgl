@@ -4,7 +4,7 @@ import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import moment from 'moment'
 import {Redirect} from 'react-router-dom'
-import {completeHire} from '../../../store/actions/adminHireActions'
+import {completeHire} from '../../../../store/actions/adminHireActions'
 
 class ManageOngoingHire extends Component {
     state = {

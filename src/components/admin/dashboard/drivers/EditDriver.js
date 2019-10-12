@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {editUser} from '../../../store/actions/adminActions'
+import {editUser} from '../../../../store/actions/adminActions'
 
 class EditDriver extends Component {
 

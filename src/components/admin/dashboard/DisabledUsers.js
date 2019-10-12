@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
-import DisabledDrivers from './DisabledDrivers'
-import DisabledCustomers from './DisabledCustomers'
-import DisabledVehicles from './DisabledVehicles'
+import DisabledDrivers from './drivers/DisabledDrivers'
+import DisabledCustomers from './customers/DisabledCustomers'
+import DisabledVehicles from './vehicles/DisabledVehicles'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
@@ -21,7 +21,7 @@ class ManageCustomer extends Component {
 
     componentWillReceiveProps(nextProps) {
         
-        if(this.props.customers && this.props.drivers && this.props.drivers){
+        if(this.props.customers && this.props.drivers && this.props.vehicles){
             this.setState({
                 ...nextProps,
                 loading: 0

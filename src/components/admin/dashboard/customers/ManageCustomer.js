@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import EditCustomer from './EditCustomer'
-import Exports from './Exports'
-import Imports from './Imports'
-import DisableAccount from './DisableAccount'
+import Exports from '../hires/Exports'
+import Imports from '../hires/Imports'
+import DisableAccount from '../DisableAccount'
 import CustomerProfile from './CustomerProfile'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'

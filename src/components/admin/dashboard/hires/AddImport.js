@@ -1,19 +1,21 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addExportHire} from '../../../store/actions/adminHireActions'
+import {addImportHire} from '../../../../store/actions/adminHireActions'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
+// import { thisExpression } from '@babel/types'
 
-class AddExport extends Component {
+class AddImport extends Component {
     state = {
         containerType: '20',
         pickupLocation: '',
         pickupDatetime: '',
         cargoType: '',
         weight: '',
-        loadingPort: '',
-        loadingDatetime: '',
+        unloadingPort: '',
+        vesselArrivalDatetime: '',
+        destination: '',
         driverId: '',
         driverName: '',
         customerId: '',
@@ -35,10 +37,11 @@ class AddExport extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addExportHire(this.state)
+        this.props.addImportHire(this.state) 
         this.setState({
             redir : 1
         })
+        
     }
 
     handleDate = (e) => {
@@ -74,19 +77,18 @@ class AddExport extends Component {
     }
 
     availableDrivers = (e) => {
-
         const dateTime = this.refs.pickup.value
 
         if(dateTime){
             if(this.props.hires && this.props.drivers){
-                const driversOnHire = this.props.hires.filter(item => item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.driverId)
+                const driversOnHire = this.props.hires.filter(item =>item.pickupDatetime.toString().split('T')[0] === dateTime.toString().split('T')[0]).map(a => a.driverId)
 
-                const allDrivers = this.props.drivers.filter(item => item.disabled === false)
+                const allDrivers = this.props.drivers
                 const freeDrivers = allDrivers.filter(function(item) {
                     return !driversOnHire.includes(item.id); 
                   })
                 this.setState({
-                    freeDrivers: freeDrivers
+                    freeDrivers: freeDrivers.filter(item => item.disabled === false)
                 });
             }
         }else{
@@ -158,7 +160,7 @@ class AddExport extends Component {
             ) :
             <div>
                 <br/><br/>
-                <h2 className="center">Add Export</h2><br/><br/>
+                <h2 className="center">Add Import</h2><br/><br/>
                 <form onSubmit={this.handleSubmit} >
                     <div className="row col-4">
                         <select className="form-control" placeholder="Container Type" id="containerType" onChange={this.handleContainerType} required>
@@ -172,25 +174,30 @@ class AddExport extends Component {
                             <input placeholder="Pickup Location" type="text" id="pickupLocation" onChange={this.handleChange} required />
                         </div>
                         <div className="input-field col-6">
-                            <input placeholder="Pickup Date and Time" onFocus={this.handleDate} ref="pickup" type="text" id="pickupDatetime"  onChange={this.handleChange} required />    
+                            <input placeholder="Pickup Date and Time" ref="pickup" onFocus={this.handleDate} type="text" id="pickupDatetime" onChange={this.handleChange} required />
                         </div>
                     </div>
                     <br/><hr/><h5>Cargo Details</h5> <br/>
                     <div className="row">
                         <div className="input-field col-6">
-                            <input placeholder="Cargo Type" type="text" id="cargoType" onChange={this.handleChange} required/>
+                            <input placeholder="Cargo Type" type="text" id="cargoType" onChange={this.handleChange} required />
                         </div>
                         <div className="input-field col-6">
-                            <input placeholder="Weight" type="text" id="weight" onChange={this.handleChange} required/>
+                            <input placeholder="Weight" type="text" id="weight" onChange={this.handleChange} required />
                         </div>
                     </div>
-                    <br/><hr/><h5>Loading Details</h5><br/>
+                    <br/><hr/><h5>Unloading Details</h5><br/>
                     <div className="row">
                         <div className="input-field col-6">
-                            <input placeholder="Loading Port" type="text" id="loadingPort" onChange={this.handleChange} required/>
+                            <input placeholder="unloading Port" type="text" id="unloadingPort" onChange={this.handleChange} required />
                         </div>
                         <div className="input-field col-6">
-                            <input placeholder="Loading Date and Time" onFocus={this.handleDate} type="text" id="loadingDatetime" onChange={this.handleChange} required />
+                            <input placeholder="Vessel Arrival Date and Time" onFocus={this.handleDate} type="text" id="vesselArrivalDatetime" onChange={this.handleChange} required />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col-6">
+                            <input placeholder="Destination" type="text" id="destination" onChange={this.handleChange} required />
                         </div>
                     </div>
                     <br/><hr/><h5>Customer</h5><br/>
@@ -221,16 +228,17 @@ class AddExport extends Component {
                     </div>
                     <br/>
                     <div className="input-field row col-12">
-                        <textarea placeholder="Remarks" style={{ minHeight: 100 }} type="text" id="remarks" onChange={this.handleChange} />
+                        <textarea placeholder="Remarks" style={{ minHeight: 100 }} type="text" id="remarks" onChange={this.handleChange}/>
                     </div>
-                    <input type="hidden" id="hireType" value="export"/><br/><br/>
+                    <br/><br/>
                     <div className="input-field center">
-                        <button className="btn blue lighten-1 z-depth-0">Add</button>
+                        <button className="btn blue lighten-1 z-depth-0" type="submit">Add</button>
                         <button className="btn red lighten-1 z-depth-0">Cancel</button>
                     </div>
                 </form>
             </div>
-        )
+        )     
+        
     }
 }
 
@@ -245,7 +253,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addExportHire: (exportHire) => dispatch(addExportHire(exportHire))
+        addImportHire: (importHire) => dispatch(addImportHire(importHire))
     }
 }
 
@@ -257,4 +265,4 @@ export default compose(
         {collection: 'vehicles'},
         {collection: 'hires'}
     ])
-)(AddExport);
+)(AddImport);

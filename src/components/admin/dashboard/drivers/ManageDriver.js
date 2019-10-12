@@ -1,18 +1,18 @@
 import React, {Component} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
-import EditVehicle from './EditVehicle'
-import Exports from './Exports'
-import Imports from './Imports'
-import DisableVehicle from './DisableVehicle'
-import VehicleProfile from './VehicleProfile'
+import EditDriver from './EditDriver'
+import Exports from '../hires/Exports'
+import Imports from '../hires/Imports'
+import DisableAccount from '../DisableAccount'
+import DriverProfile from './DriverProfile'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {Redirect} from 'react-router-dom'
 
 
-class ManageVehicle extends Component {
+class ManageDriver extends Component {
     static defaultProps = { 
         hires: []       
     }
@@ -23,7 +23,7 @@ class ManageVehicle extends Component {
 
     componentWillReceiveProps(nextProps) {
         
-        if(this.props.vehicle){
+        if(this.props.driver){
             this.setState({
                 loading: 0
             });
@@ -34,19 +34,19 @@ class ManageVehicle extends Component {
         const {auth} = this.props
         if (!auth.uid) return <Redirect to='/signin' />
 
-        const importHires = this.props.hires.filter(item => item.hireType === "import" && item.vehicleId === this.props.id)
-        const exportHires = this.props.hires.filter(item => item.hireType === "export" && item.vehicleId === this.props.id)
+        const importHires = this.props.hires.filter(item => item.hireType === "import" && item.driverId === this.props.id)
+        const exportHires = this.props.hires.filter(item => item.hireType === "export" && item.driverId === this.props.id)
         
         const load = this.state.loading === 0 ? (
             <div id="content" className="container-fluid" role="main">
                 <br/><br/><br/><br/>
 
-                <VehicleProfile vehicle={this.props.vehicle[0]} id={this.props.id}></VehicleProfile>
+                <DriverProfile driver={this.props.driver[0]} id={this.props.id}></DriverProfile>
 
                 <Tabs className="center">
                     <TabList className="left">
                         <Tab>Hires</Tab>
-                        <Tab>Edit Vehicle</Tab>
+                        <Tab>Edit Profile</Tab>
                         <Tab>Settings</Tab>
                     </TabList>
                     <br/><br/>
@@ -65,10 +65,10 @@ class ManageVehicle extends Component {
                         </Tabs>
                     </TabPanel>
                     <TabPanel>
-                        <EditVehicle vehicle={this.props.vehicle[0]} id={this.props.id}></EditVehicle>
+                        <EditDriver driver={this.props.driver[0]} id={this.props.id}></EditDriver>
                     </TabPanel>
                     <TabPanel>
-                        <DisableVehicle vehicle={this.props.vehicle[0]} id={this.props.id}></DisableVehicle>
+                        <DisableAccount user={this.props.driver[0]} id={this.props.id} type='drivers'></DisableAccount>
                     </TabPanel>
                 </Tabs>
             </div>
@@ -83,7 +83,7 @@ const mapStateToProps = (state, ownProps) => {
         id: id,
         auth: state.firebase.auth,
         hires: state.firestore.ordered.hires,
-        vehicle: state.firestore.ordered.vehicles
+        driver: state.firestore.ordered.drivers
     }
 }
 
@@ -91,6 +91,6 @@ export default compose(
     connect(mapStateToProps),
     firestoreConnect(props => [
         {collection: 'hires'},
-        {collection: 'vehicles', doc: props.id}
+        {collection: 'drivers', doc: props.id}
     ])
-)(ManageVehicle)
+)(ManageDriver)

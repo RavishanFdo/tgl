@@ -20,7 +20,7 @@ class VehicleProfile extends Component {
         const load = this.state.loading === 0 ? (
             <div className="row">
                 <div className="col-3">
-                    <img src={require('../../../img/truck.jpg')} class="mx-auto img-fluid img-circle d-block left" alt="avatar" />
+                    <img src={require('../../../../img/truck.jpg')} class="mx-auto img-fluid img-circle d-block left" alt="avatar" />
                     <h6 class="mt-2 left">Upload a different photo</h6>
                     <label class="custom-file">
                         <input type="file" id="file" class="custom-file-input" />

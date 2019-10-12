@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {disableOrEnableVehicle} from '../../../store/actions/adminActions'
+import {disableOrEnableVehicle} from '../../../../store/actions/adminActions'
 import Switch from "react-switch";
 
 class DisableVehicle extends Component {
