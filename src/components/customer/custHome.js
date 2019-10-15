@@ -4,7 +4,7 @@ import Carousel from 'nuka-carousel';
 
 const divStyle = {
     overflow:'hidden',
-    height:'550px',
+    height:'550px', 
     paddingTop: '0px'
 }
 
@@ -26,9 +26,7 @@ const CustHome = () => {
                         <img src={require('../../img/index1.png')} alt=""/>
                     </div>
                     <div className="col-md-6">
-                        {/* <h2><strong>Trans Global Logistics Pvt Ltd.</strong></h2> */}
-                        {/* <hr className="bg-dark w-25 ml-0"/> */}
-                        {/* <br/> */}
+                        
                         <p>At Trans GlobalLogistics, we combine our twenty years of experience in the industry, global expertise and professionalism to deliver 
                             importers and exporters tailor-made and fully integrated solutions ensuring you the best freight rates, transit time and fast space arrangements each and every time.
                             <br/><br/> Providing you with worldwide air and ocean freight, contract logistics and supply chain management services we help you manage your supply chain process with more 
@@ -48,7 +46,7 @@ const CustHome = () => {
                 </Carousel>
             </div>
 
-            <br/><br/><br/><br/><hr/><br/><br/><br/>
+             <br/><br/><br/><br/><hr/><br/><br/><br/>
             <div className="container mb-5">
                 <div className="row">
                     <div className="col-md-8">

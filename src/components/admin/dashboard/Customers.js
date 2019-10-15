@@ -24,6 +24,7 @@ class Customers extends Component {
         if (!auth.uid) return <Redirect to='/signin' />
         return(
         // <div className="main-panel">
+       
             <div id="content" className="container-fluid" role="main">
                 <br/><br/><br/><br/>
                 <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>+ Customer</Button>

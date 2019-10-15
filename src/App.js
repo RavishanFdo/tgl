@@ -33,6 +33,8 @@ import EditVehicle from './components/admin/dashboard/EditVehicle'
 import CustomerAddHire from './components/customer/customerAddHire'
 import Dashboard from './components/customer/dashboard'
 import Profile from './components/customer/profile'
+import EditProfile from './components/customer/editProfile'
+import ResetPassword from './components/customer/resetPassword';
 
 function App(props) {
 
@@ -75,7 +77,10 @@ function App(props) {
 
               <Route path='/cust/addHire' component={CustomerAddHire}/>
               <Route path='/cust/Home' component={Dashboard}/>
-              <Route path='/cust/profile' component={Profile}/>
+              <Route exact path='/cust/profile' component={Profile}/>
+              <Route path='/cust/profile/:id' component={EditProfile}/>
+              <Route path='/cust/profile/resetPassword ' component={ResetPassword}/>
+
             </Switch>
           </div>
         </div>

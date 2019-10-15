@@ -1,10 +1,11 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink,Link} from 'react-router-dom'
 import {Button, Nav, Navbar} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {signOut} from '../../store/actions/authActions'
 
 const SignedInLinks = (props) => {
+
     return(
         <Navbar bg="dark" variant="dark" style={{ minWidth: 700, position: 'fixed' }}>
             <div className="container" >
@@ -14,8 +15,8 @@ const SignedInLinks = (props) => {
                     <Nav.Link><NavLink to='/about'>About</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/services'>Services</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/contact'>Contact</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/cust/profile'><i class="fas fa-user-circle"></i></NavLink></Nav.Link>
-                    {/* <Nav.Link><Button onClick={props.signOut}>Logout</Button></Nav.Link> */}
+                    <Nav.Link><NavLink to={'/cust/profile' } ><i class="fas fa-user-circle"></i></NavLink></Nav.Link>
+                    <Nav.Link><Button onClick={props.signOut}>Logout</Button></Nav.Link>
                 </Nav>
             </div>
         </Navbar>       
