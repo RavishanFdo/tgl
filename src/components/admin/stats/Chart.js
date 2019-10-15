@@ -24,19 +24,28 @@ class Chart extends Component {
         }
       },
       xAxis: {
-        // categories: mon,
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       },
       plotOptions: {
         series: {
             label: {
                 connectorAllowed: false
             },
-            pointStart: 2010
+            pointStart: 0
         }
       },
       series: [
-        // { name: 'imports', type: 'line', data: num},
         {
+          name: 'Imports',
+          allowPointSelect: true,
+          point: {
+            events: {}
+          },
+          data: [],
+          type: "line"
+        },
+        {
+          name: 'Exports',
           allowPointSelect: true,
           point: {
             events: {}
@@ -44,7 +53,6 @@ class Chart extends Component {
           data: [],
           type: "line"
         }
-        // {type: 'line', data: importHires}
       ],
       legend: {
         layout: 'vertical',
@@ -68,7 +76,7 @@ class Chart extends Component {
     }
 
     const importHires = this.props.hires
-    const exportHires = this.props.hires.filter(item => item.hireType === "export" && (item.hireStatus === "completed"))
+    const exportHires = this.props.hires.filter(item => item.hireType === "export" && (item.hireStatus === "completed") && (new Date(item.completedDatetime).getFullYear() === new Date().getFullYear()))
     
 
     var group_imports_to_months = importHires.reduce(function (obj, item) {
@@ -78,27 +86,30 @@ class Chart extends Component {
     }, {});
 
     var group_exports_to_months = exportHires.reduce(function (obj, item) {
-      obj[item.pickupDatetime] = obj[item.pickupDatetime] || []; 
-      obj[item.pickupDatetime].push(item.id);
+      obj[(new Date(item.completedDatetime)).getMonth()] = obj[(new Date(item.completedDatetime)).getMonth()] || []; 
+      obj[(new Date(item.completedDatetime)).getMonth()].push(item.id);
       return obj;
     }, {});
 
 
   var imports = Object.entries(group_imports_to_months).sort()
-  var exports = Object.entries(group_exports_to_months).map(([pickupDatetime, id]) => ({ pickupDatetime, id }));
+  var exports = Object.entries(group_exports_to_months).sort()
   
-  console.log("huraaay",imports)
-  // options.series[0].date.push(imports[0])
 
-  let newData = []
+  // let monthData = new Array(12).fill(0)
+  let importData = new Array(12).fill(0)
+  let exportData = new Array(12).fill(0)
+
   for(var i=0;i<imports.length;i++){
-    newData.push({
-      x: imports[i][0],
-      y: imports[i][1]
-    });
+    importData[parseInt(imports[i][0])] = imports[i][1].length
   }
-  options.series[0].data = newData;
 
+  for(var j=0;j<exports.length;j++){
+    exportData[parseInt(exports[i][0])] = exports[i][1].length
+  }
+
+  options.series[0].data = importData;
+  options.series[2].data = exportData;
 
     
 

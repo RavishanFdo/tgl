@@ -15,7 +15,7 @@ const AdminDashboard = (props) => {
                     </div>
                     <StatCard></StatCard>
                     <br/><br/>
-                    <h2>Performance</h2>
+                    <h2>Performance - This Year</h2>
                     <Chart></Chart>
                 </div>
             </div>
