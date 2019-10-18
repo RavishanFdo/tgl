@@ -23,8 +23,14 @@ class SignIn extends Component {
     }
 
     render() {
-        const {authError,user} = this.props
-        if (user.userType === 'admin') return <Redirect to='/admin' />
+        const {authError, user, auth} = this.props
+        // if(auth.uid){
+        //     localStorage.setItem('userId', 'admin')
+        // }
+        if (user.userType === 'admin'){
+            localStorage.setItem('userId', 'admin')
+            return <Redirect to='/admin' />
+        } 
         if (user.userType === 'customer' && user.disabled === false) return <Redirect to='/' />
         if (user.disabled === true) return <Redirect to='/error' />
         return (
@@ -68,7 +74,8 @@ const mapStateToProps = (state) => {
     console.log(state)
     return {
         authError: state.auth.authError,
-        user: state.firebase.profile
+        user: state.firebase.profile,
+        auth: state.firebase.auth
     }
 }
 

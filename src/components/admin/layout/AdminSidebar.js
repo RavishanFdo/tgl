@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { FaUsers, FaBuffer, FaTruck, FaUserCog, FaClock, FaPlusSquare, FaPlay, FaUserSlash} from "react-icons/fa";
 
 class Sidebar extends Component {
@@ -20,6 +20,7 @@ class Sidebar extends Component {
   //   window.addEventListener("resize", this.updateDimensions.bind(this));
   // }
   render() {
+    // if(!localStorage.getItem('userId')) return <Redirect to='/signIn' />
     return (
       <div className="bg-dark border-right" id="sidebar-wrapper">
       <div className="sticky-top">

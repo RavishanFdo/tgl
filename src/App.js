@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Homepage from './components/dashboard/Homepage'
 import About from './components/dashboard/About'
@@ -42,17 +42,21 @@ import Message from './components/customer/message'
 
 function App(props) {
   
-  const {type} = props;
+  const {type, auth} = props;
+
+  if(type.userType === 'admin'){
+    localStorage.setItem("userId", 'admin') 
+  }
 
   const link = type.userType === "admin" ? null : <Footer/>
-  const sidebar = type.userType === "admin" ? <AdminSidebar/> : null
+  const sidebar = localStorage.getItem('userId') === 'admin' ? <AdminSidebar/> : null
 
   return (
     <BrowserRouter>
       <div className="App">
-        <div className={type.userType === 'admin' ? "d-flex" : "wrapper"} id={type.userType === 'admin' ? "wrapper" : null}>
+        <div className={localStorage.getItem('userId') === 'admin' ? "d-flex" : "wrapper"} id={type.userType === 'admin' ? "wrapper" : null}>
           {sidebar}
-          <div id={type.userType === 'admin' ? "page-content-wrapper" : null} className={type.userType === 'admin' ? "" : null}> 
+          <div id={localStorage.getItem('userId') === 'admin' ? "page-content-wrapper" : null} className={type.userType === 'admin' ? "" : null}> 
             <Navbar></Navbar>
             <Switch>
               <Route exact path='/' component={Homepage} />
@@ -94,9 +98,10 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
+  console.log('app state',state)
   return {
-    type: state.firebase.profile
+    type: state.firebase.profile,
+    auth: state.firebase.auth
   }
 }
 

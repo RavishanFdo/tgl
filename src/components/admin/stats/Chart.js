@@ -109,7 +109,7 @@ class Chart extends Component {
   }
 
   options.series[0].data = importData;
-  options.series[2].data = exportData;
+  options.series[1].data = exportData;
 
     
 
