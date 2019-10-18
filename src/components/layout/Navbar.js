@@ -9,7 +9,7 @@ const Navbar = (props) => {
 
     const {auth, type} = props
 
-    const links = auth.uid && type.userType === 'customer' ? <SignedInLinks/> :  (auth.uid && type.userType === 'admin' ? <><AdminNavbar/> </> : <SignedOutLinks/> );
+    const links = auth.uid && type.userType === 'customer' && type.disabled === 0 ? <SignedInLinks/> :  (auth.uid && type.userType === 'admin' ? <><AdminNavbar/> </> : <SignedOutLinks/> );
     return(
         <div>
             {links}

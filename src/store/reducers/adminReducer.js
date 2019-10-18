@@ -27,7 +27,13 @@ const adminReducer = (state = initState, action) => {
             return state;
         case 'ERROR_UPDATING_DOCUMENT' :
             console.log('error updating document', action.err)
-            return state
+            return state;
+        case 'AVAILABILITY_UPDATED':
+            console.log('User availability updated')
+            return state;
+        case 'FAILED_TO_UPDATE_AVAILABILITY':
+            console.log('User availability update failed')
+            return state;
         default:
             return state
     }

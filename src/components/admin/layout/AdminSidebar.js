@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { FaUsers, FaBuffer, FaTruck, FaUserCog, FaClock, FaPlusSquare, FaPlay} from "react-icons/fa";
+import { FaUsers, FaBuffer, FaTruck, FaUserCog, FaClock, FaPlusSquare, FaPlay, FaUserSlash} from "react-icons/fa";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -31,12 +31,17 @@ class Sidebar extends Component {
             <NavLink to='/admin/drivers' className="text-decoration-none"><li className="list-group-item list-group-item-action "><FaUserCog/> Drivers</li></NavLink>
             <NavLink to='/admin/vehicles' className="text-decoration-none"><li className="list-group-item list-group-item-action "><FaTruck/> Vehicles</li></NavLink>
           </ul>
-        </div><br/><br/>
-        <div className="list-group list-group-flush">
+        </div>
+        <div className="list-group list-group-flush" style={{paddingTop: "50px"}}>
           <ul className="align-self-center">
             <NavLink to='/admin/hirerequests' className="text-decoration-none"><li className="list-group-item list-group-item-action "><FaClock/> Hire Requests</li></NavLink>
             <NavLink to='/admin/ongoinghires' className="text-decoration-none"><li className="list-group-item list-group-item-action "><FaPlay/> Ongoing Hires</li></NavLink>
             <NavLink to='/admin/addhire' className="text-decoration-none"><li className="list-group-item list-group-item-action "><FaPlusSquare/> Add Hire</li></NavLink>
+          </ul>
+        </div>
+        <div className="list-group list-group-flush" style={{paddingTop: "50px"}}>
+          <ul className="align-self-center">
+            <NavLink to='/admin/disabled' className="text-decoration-none"><li className="list-group-item list-group-item-action "><FaUserSlash/> Disabled</li></NavLink>
           </ul>
         </div>
       </div>
