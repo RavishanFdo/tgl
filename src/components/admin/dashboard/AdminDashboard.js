@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 const AdminDashboard = (props) => {
     const {auth} = props
-    if (!auth.uid) return <Redirect to='/signin' />
+    if (!localStorage.getItem('userId')) return <Redirect to='/signin' />
     return (
             <div id="content" className="container-fluid" role="main">
                 <div className="">

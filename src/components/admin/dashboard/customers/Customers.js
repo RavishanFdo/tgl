@@ -22,7 +22,7 @@ class Customers extends Component {
 
     render () {
         const {auth, customers} = this.props
-        if (!auth.uid) return <Redirect to='/signin' />
+        if (!localStorage.getItem('userId')) return <Redirect to='/signin' />
 
         const columns = [
             { title: "Name", field: "name", headerFilter:"input" },

@@ -16,6 +16,7 @@ export const signIn = (credentials) => {
 }
 
 export const signOut = () => {
+    localStorage.removeItem('userId')
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
 
