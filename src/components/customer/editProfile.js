@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {editUser} from '../../store/actions/adminActions'
-import image from '../../img/importreq.jpg'
-
+import Sidebar from './sidebar'
+import { Link } from 'react-router-dom'
 
 class EditProfile extends Component {
 
@@ -52,8 +52,17 @@ class EditProfile extends Component {
         
         const load = this.state.loading === 0 ? (
             // <div style={{backgroundImage:"url("+image+")" ,opacity:'0.5'}}>
-            <div className="container jumbotron"  >
-                    <h2 className="center" style={{paddingTop: '100px'}}>Edit Profile</h2><br/><br/>
+            <div className="container "   >
+                <br/><br/><br/><br/>
+                <div >
+                 <hr/>
+                <h1>EDIT PROFILE</h1>  
+                <hr/>
+                <div className='row'>
+                    <div className='col'>
+                        <Sidebar/>
+                    </div>
+                    <div className='col'>
                     <div className="green-text center">
                         <h4>{this.state.updated ? "Updated Successfully" : null}</h4>
                     </div>
@@ -93,9 +102,14 @@ class EditProfile extends Component {
                         </div><br/>
                         <div className="input-field center">
                             <button className="btn blue lighten-1 z-depth-0">Update</button>
+                            <Link to='/cust/profile'><button className="btn silver lighten-1 z-depth-0">Cancel</button></Link>
                         </div>
                     </form>
                 </div>
+            </div>
+            </div>
+         </div>
+              
                 // </div>  
         ) : <div><br/><br/><br/>Loading</div>
         return <div>{load}</div>

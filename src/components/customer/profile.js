@@ -5,12 +5,13 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import image from '../../img/importreq.jpg'
-// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import Sidebar from './sidebar'
+
 
 const imgStyle={
     borderRadius:'50%',
-    height:'150px',
-    width:'150px',
+    height:'100px',
+    width:'100px',
 }
 const rowStyle={
     margin:'0',
@@ -32,45 +33,50 @@ class Profile extends React.Component {
         // <div style={{backgroundImage:"url("+image+")" }}>
         <div className='container'>
             <br/><br/><br/><br/>
-                    
-           <div className='row ' >
-            <hr/><hr/>
-           <div className='col '>
-          
-                            <Card className='bg-dark' style={{color:'white'}}>
-                                <Card.Body><Link style={{color:'white'}} to={'/cust/profile/' + auth.uid}>Edit Profile</Link></Card.Body>
-                                <Card.Body><Link style={{color:'white'}} to={'/cust/profile/resetPassword'}>Change Password</Link></Card.Body>
-                                <Card.Body><Link style={{color:'white'}}>View Messages</Link></Card.Body>
-                                <Card.Body><Link style={{color:'white'}}>Manage Hires</Link></Card.Body>
-
-                            </Card>
-                            
-                        </div>
-
-                       <div className="col" >
-                           <div className="card" >
-                               <div className="card-body">
-                               <img className="card-img-top " src={require('../../img/userimg.png')} alt="Card cap" style={ imgStyle}/>
-                               <p className="card-text text-right" >
-                                   {/* <div style={{hStyle}}>Edit your profile and change your settings</div><br/> */}
-                               <Link to={'/cust/profile/' + auth.uid}>
-                                   <button  style ={{alignContent:'right'}} type="button" data-toggle="modal" data-id="" class="edit-details btn btn-info" data-target="#edit">Edit Profile</button></Link>
-                               </p>
-                               </div>
-                           </div>
-                       </div>
-                      
-                        <div className="col" >
-                                <div className="card" >
-                                    <div className="card-body">
-                                    <img className="card-img-top " src={require('../../img/sms.jpg')} alt="Card cap" style={ imgStyle}/>
-                                    <p className="card-text text-right"><Link to=''><button className="btn btn-info">View Messages</button> </Link></p>
-                                    </div>
-                                </div>
-                        </div>
-                </div> 
+            <div style={{backgroundColor:''}}>
+            <hr/>
+            <h1 >MY ACCOUNT</h1>  
+            <hr/>
             </div>
-            // </div>
+           
+           <div className='row ' >
+              
+                 <div className='col-md-4'>
+                    <Sidebar/>
+                </div>
+
+                <div className="col-md-4"  >
+                    <Card style={{ width: '18rem'}}>
+                        <Card.Img variant="top"  className='center' src={require('../../img/user.png')} 
+                        style={{
+                            opacity:'0.5' ,width:'15rem',paddingTop:'1rem', display: 'block',  marginLeft: 'auto' , marginRight: 'auto'
+                            }} />
+                        <Card.Body>
+                            <Card.Title><b>Edit Profile </b> </Card.Title>
+                            <Card.Text>
+                            Edit your profile and change subscription settings
+                            </Card.Text>
+                            <Link to={'/cust/profile/' + auth.uid}><Button className='btn btn-info' variant="primary">Edit</Button></Link>
+                        </Card.Body>
+                    </Card>
+                </div>
+
+                <div className="col-md-4" >
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={require('../../img/msg.jpg')} style={{opacity:'0.5',paddingTop:'1rem',}} />
+                        <Card.Body>
+                            <Card.Title><b>View messages</b></Card.Title>
+                            <Card.Text>
+                            Get any advice or opinion just by sending a message.
+                            </Card.Text>
+                            <Link to='/cust/messages'><Button className='btn btn-info' variant="primary">View</Button></Link>
+                        </Card.Body>
+                    </Card>  
+                
+                </div>  
+            </div>
+            <hr/>
+        </div> 
         )
     }
 }

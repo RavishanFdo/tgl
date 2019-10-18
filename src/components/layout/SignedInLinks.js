@@ -11,7 +11,8 @@ const SignedInLinks = (props) => {
             <div className="container" >
                 <NavLink to='/'style={{ minWidth: 300 }} ><h3>Trans Global Logistics</h3></NavLink>
                 <Nav className="mr-auto right-align">
-                    <Nav.Link><NavLink to='/cust/Home'>Home</NavLink></Nav.Link>
+                    <Nav.Link><NavLink to='/cust/addHire'>+AddHire</NavLink></Nav.Link>
+                    <Nav.Link><NavLink to='/'>Home</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/about'>About</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/services'>Services</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/contact'>Contact</NavLink></Nav.Link>
