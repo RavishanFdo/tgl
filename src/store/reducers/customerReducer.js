@@ -2,7 +2,11 @@ const initState={
     messages:[
         {id:'1',state:'unread',name:'user',content:'test case 1'},
 
-    ]
+    ],
+    recoverPassword:{
+        error:null,
+        loading:false
+    }
 }
 const customerReducer =(state = initState ,action) => {
     switch(action.type){
@@ -10,9 +14,26 @@ const customerReducer =(state = initState ,action) => {
             console.log('sent message',action.message)
             return state
         case 'SEND_MESSAGE_ERROR' :
-            console.log('messsage sent error',action.err)
+            console.log('messsage sent error',action.error)
             return state
-        default:
+        case 'RESET_PASSWORD' :
+            console.log('CHANGED PASSWORD',action.newPasSword)
+            return state
+        case 'PASSWORD_RESET_ERROR' :
+            console.log('PASSWORD_RESET_ERROR',action.error)
+            return state
+        case 'RECOVERY_START':
+            return{ ...state,
+                recoverPassword:{...state.recoverPassword,loading:true}}
+        case 'RECOVERY_SUCCESS':
+                return{ ...state,
+                    recoverPassword:{...state.recoverPassword,loading:false,error:false}}
+        case 'RECOVERY_FAIL':
+                return{ ...state,
+                    // recoverPassword:{...state.recoverPassword,loading:false,error:}
+                }
+                        
+                default:
             return state
     }
  }

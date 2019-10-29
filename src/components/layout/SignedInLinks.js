@@ -9,27 +9,18 @@ const SignedInLinks = (props) => {
     return(
         <Navbar bg="dark" variant="dark" style={{ minWidth: 700, position: 'fixed' }}>
             <div className="container" >
-                <NavLink to='/'style={{ minWidth: 300 }} ><h3>Trans Global Logistics</h3></NavLink>
-                <Nav className="mr-auto right-align">
-                    <Nav.Link><NavLink to='/cust/addHire'>+AddHire</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/'>Home</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/about'>About</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/services'>Services</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/contact'>Contact</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to={'/cust/profile' } ><i class="fas fa-user-circle"></i></NavLink></Nav.Link>
-                    <Nav.Link><Button onClick={props.signOut}>Logout</Button></Nav.Link>
-            {/* <div className="container">
-                <NavLink to='/'style={{ minWidth: 300, textDecoration:'none'}} ><h3>Trans Global Logistics</h3></NavLink>
-                <Nav className="mr-auto right-align">
+                <NavLink to='/'style={{ minWidth: 300 }} ><h3>Trans Global Logistics</h3></NavLink> 
+                 <Nav className="mr-auto right-align"  style={{margin:'10px',paddingRight:'20px'}}>
+                    <Nav.Link><NavLink to='/cust/addHire' style={{textDecoration: 'none'}}>+AddHire</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/' style={{textDecoration: 'none'}}>Home</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/about' style={{textDecoration: 'none'}}>About</NavLink></Nav.Link>
                     <Nav.Link><NavLink to='/services' style={{textDecoration: 'none'}}>Services</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/contact' style={{textDecoration: 'none'}}>Contact</NavLink></Nav.Link>
-                    <Nav.Link><NavLink to='/' style={{textDecoration: 'none'}}>Profile</NavLink></Nav.Link>
-                    <Nav.Link><Button onClick={props.signOut} style={{textDecoration: 'none'}}>Logout</Button></Nav.Link> */}
-                </Nav>
-            </div>
+                    <Nav.Link><NavLink to='/contact'style={{textDecoration: 'none'}}>Contact</NavLink></Nav.Link>
+                    <Nav.Link><NavLink to='/cust/profile' style={{textDecoration: 'none'}} ><i class="fas fa-user-circle"></i></NavLink></Nav.Link>
+                    <Nav.Link><Button onClick={props.signOut} style={{textDecoration: 'none'}}>Logout</Button></Nav.Link>
 
+                </Nav>
+            </div> 
         </Navbar>       
     )
 }
@@ -40,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(SignedInLinks);
+export default connect(null,mapDispatchToProps)(SignedInLinks)

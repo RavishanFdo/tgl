@@ -15,16 +15,16 @@ import thunk from 'redux-thunk'
 import fbConfig from './config/fbConfig'
 
 import { createFirestoreInstance, getFirestore, reduxFirestore } from 'redux-firestore';
-import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'; 
+import { ReactReduxFirebaseProvider, getFirebase,reactReduxFirebase } from 'react-redux-firebase'; 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 
 const store = createStore(rootReducer,
     compose(
-        applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+        applyMiddleware(thunk.withExtraArgument({ getFirebase , getFirestore })),
         reduxFirestore(firebase)
-        // reactReduxFirebase(fbConfig)
+        // reactReduxFirebase(fbConfig,{useFirestoreForProfile: true,userProfile:'users'})
     )
 );
  

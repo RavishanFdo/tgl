@@ -39,7 +39,12 @@ import Profile from './components/customer/profile'
 import EditProfile from './components/customer/editProfile'
 import ResetPassword from './components/customer/resetPassword'
 import Message from './components/customer/message'
-
+import CompletedHires from './components/customer/hires/CustCompletedHires'
+import HireRequest from './components/customer/hires/CustHireRequest'
+import DeclinedHire from './components/customer/hires/CustDeclinedHires'
+import OngoingHire from './components/customer/hires/CustOngoingHire'
+import ManageHires from './components/customer/hires/CustManageHires'
+import ManageTools from './components/customer/hires/CustManageTools'
 function App(props) {
   
   const {type, auth} = props;
@@ -87,6 +92,22 @@ function App(props) {
               <Route path='/admin/hires/:id' component={ManageHire} />
 
               <Route path='/admin/disabled' component={DisabledUsers}/>
+
+              <Route path='/cust/addHire' component={CustomerAddHire}/>
+              <Route path='/cust/Home' component={Dashboard}/>
+              <Route path='/cust/resetPassword' component={ResetPassword}/>
+              <Route path ='/cust/messages' component={Message}/>
+              <Route exact path='/cust/profile' component={Profile}/>
+              <Route exact path='/cust/profile/:id' component={EditProfile}/>
+
+              <Route path='/cust/custHireRequests' component={HireRequest}/>
+              <Route path='/cust/custOngoingHires ' component={OngoingHire }/>
+              <Route path='/cust/custManageTools' component={ManageTools}/>
+              <Route path='/cust/custManageHires/:id' component={ManageHires}/>
+              <Route path='/cust/custCompletedHires' component={CompletedHires}/>
+              <Route path='/cust/custDeclinedHires' component={DeclinedHire}/>
+
+
             </Switch>
           </div>
         </div>

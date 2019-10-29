@@ -30,13 +30,16 @@ class Profile extends React.Component {
        const {auth,customers} = this.props
       
     return(
-        // <div style={{backgroundImage:"url("+image+")" }}>
-        <div className='container'>
+        // <div style={{backgroundImage:"url("+image+")" ,backgroundRepeat:'no' ,Opacity:'0.7' ,margin:'0',padding:'0'}}>
+        <div className='container' style={{backgroundColor:'',opacity:'1'}} >
             <br/><br/><br/><br/>
-            <div style={{backgroundColor:''}}>
-            <hr/>
-            <h1 >MY ACCOUNT</h1>  
-            <hr/>
+            <div style={{backgroundColor:'' ,opacity:'1'}}>
+                <hr/>
+                <div>
+                <h1 style={{float:'left'}}>MY ACCOUNT</h1>  
+                <Link to='/'><button className='btn'  style={{float:'right'}}>BACK</button></Link><br/><br/> 
+                </div>
+                <hr/>
             </div>
            
            <div className='row ' >
@@ -77,6 +80,7 @@ class Profile extends React.Component {
             </div>
             <hr/>
         </div> 
+       // </div>
         )
     }
 }
